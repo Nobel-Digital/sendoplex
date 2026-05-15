@@ -66,6 +66,8 @@ export const config: TemplateConfig = {
       "c_heroStatKicker",
       "c_heroStatNumber",
       "c_heroStatLabel",
+      "c_trustItemLabels",
+      "c_trustItemValues",
       // ── Parts / Varuosad ──────────────────────────────────────────────────
       "c_partsSectionTitle",
       "c_partsSectionDescription",
@@ -144,7 +146,7 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({ document }):
       type: "link",
       attributes: {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Instrument+Serif:ital@0;1&display=swap",
       },
     },
     {
@@ -180,6 +182,8 @@ const Location: Template<TemplateRenderProps> = ({ __meta, document }) => {
     c_heroStatNumber,
     c_heroStatLabel,
     c_heroTrustItems,
+    c_trustItemLabels,
+    c_trustItemValues,
     // Parts
     c_partsSectionTitle,
     c_partsSectionDescription,
@@ -276,11 +280,12 @@ const Location: Template<TemplateRenderProps> = ({ __meta, document }) => {
             c_heroSlogan={c_heroSlogan}
             c_heroDescription={c_heroDescription}
             c_heroButton={c_heroButton}
-            c_heroSecondaryButton={c_heroSecondaryButton}
+            mainPhone={mainPhone}
             c_heroStatKicker={c_heroStatKicker}
             c_heroStatNumber={c_heroStatNumber}
             c_heroStatLabel={c_heroStatLabel}
-            c_heroTrustItems={c_heroTrustItems}
+            c_trustItemLabels={c_trustItemLabels}
+            c_trustItemValues={c_trustItemValues}
           />
         </ErrorBoundary>
 

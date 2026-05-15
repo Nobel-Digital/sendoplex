@@ -18,10 +18,30 @@ export interface NavigationProps {
 }
 
 const LOCALE_LABELS: Record<string, string> = {
-  et: "ET",
-  en: "EN",
-  fi: "FI",
-  ru: "RU",
+  et: "ET", en: "EN", fi: "FI", ru: "RU",
+};
+
+// CSS-rendered flag component matching design
+const Flag = ({ code }: { code: string }) => {
+  const styles: Record<string, React.CSSProperties> = {
+    et: { background: "linear-gradient(180deg,#4891d9 33.33%,#14181a 33.33% 66.66%,#fff 66.66%)" },
+    en: { background: "#012169" },
+    fi: { background: "#fff", position: "relative", overflow: "hidden" },
+    ru: { background: "linear-gradient(180deg,#fff 33.33%,#0039A6 33.33% 66.66%,#D52B1E 66.66%)" },
+  };
+  return (
+    <span
+      style={{
+        display: "inline-block",
+        width: 16,
+        height: 11,
+        borderRadius: 2,
+        flexShrink: 0,
+        ...styles[code],
+      }}
+      aria-hidden="true"
+    />
+  );
 };
 
 const ArrowIcon = () => (
@@ -42,20 +62,22 @@ const Navigation = ({ data }: NavigationProps) => {
 
   const currentLocaleCode = locale.split("-")[0].toLowerCase();
   const availableLocales: string[] = data.c_availableLocales ?? [];
-  const localeLinks = availableLocales
-    .filter((code) => code.toLowerCase() !== currentLocaleCode)
-    .map((code) => {
-      const short = code.split("-")[0].toLowerCase();
-      return {
-        code,
-        label: LOCALE_LABELS[short] ?? short.toUpperCase(),
-        href: short === "et" ? "/" : `/${short}`,
-      };
-    });
-  const showSwitcher = localeLinks.length > 0;
+
+  // All locales for switcher — current shown as active
+  const allLocaleLinks = availableLocales.map((code) => {
+    const short = code.split("-")[0].toLowerCase();
+    return {
+      code,
+      short,
+      label: LOCALE_LABELS[short] ?? short.toUpperCase(),
+      href: short === "et" ? "/" : `/${short}`,
+      active: short === currentLocaleCode,
+    };
+  });
+  const showSwitcher = allLocaleLinks.length > 1;
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 40);
+    const handleScroll = () => setScrolled(window.scrollY > 60);
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
@@ -67,71 +89,114 @@ const Navigation = ({ data }: NavigationProps) => {
     setTimeout(() => openChat(), 50);
   }, []);
 
+  // Colour tokens that flip on scroll
+  const navText    = scrolled ? "text-foreground"      : "text-white";
+  const navSubText = scrolled ? "text-foreground/55"   : "text-white/70";
+  const navHover   = scrolled ? "hover:text-foreground" : "hover:text-white";
+  const divider    = scrolled ? "border-foreground/15"  : "border-white/20";
+
   return (
     <header
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-brand ${
-        scrolled ? "shadow-lg shadow-black/30" : ""
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-400 ${
+        scrolled
+          ? "bg-white/88 backdrop-blur-xl border-b border-black/8 shadow-sm"
+          : "bg-transparent"
       }`}
     >
       <div className="container mx-auto px-6 max-w-screen-xl">
-        <nav className="flex justify-between items-center py-4 text-navigation-text">
+        <nav className={`flex justify-between items-center py-4 ${navText}`}>
+
           {/* Logo */}
-          <a href="/" className="shrink-0">
+          <a href="/" className="shrink-0 flex items-center gap-2.5">
+            {/* Car icon circle */}
+            <span
+              className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 transition-colors ${
+                scrolled ? "bg-brand text-white" : "bg-white/12 text-white"
+              }`}
+            >
+              <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4" aria-hidden="true">
+                <path d="M4 9l1.5-4h9L16 9M4 9H3a1 1 0 00-1 1v2h1m1-3h12m0 0h1a1 1 0 011 1v2h-1m-1-3l.5 3M4 12l-.5 3m0 0h1m11 0h1M6.5 15a1 1 0 100-2 1 1 0 000 2zm7 0a1 1 0 100-2 1 1 0 000 2z" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </span>
             {data.logo ? (
-              <Image image={data.logo} layout="fixed" height={46} width={120} />
+              <Image image={data.logo} layout="fixed" height={28} width={100} />
             ) : (
-              <span className="text-lg font-bold tracking-tight text-white">sendoplex</span>
+              <span className="text-base font-bold tracking-tight">sendoplex</span>
             )}
           </a>
 
           {/* Desktop nav */}
-          <div className="hidden lg:flex lg:items-center lg:gap-x-8">
+          <div className="hidden lg:flex lg:items-center lg:gap-x-7">
             {navigation.map((item) => (
               <Link
                 href={item.href}
                 key={item.name}
-                className="text-sm font-medium text-white/80 hover:text-white transition-colors"
+                className={`text-sm font-medium transition-colors ${navSubText} ${navHover}`}
               >
                 {item.name}
               </Link>
             ))}
 
-            {/* Locale switcher */}
+            {/* Locale switcher — all locales visible */}
             {showSwitcher && (
-              <div className="flex items-center gap-1 border-l border-white/20 pl-6 ml-2">
-                {localeLinks.map(({ code, label, href }) => (
-                  <a
-                    key={code}
-                    href={href}
-                    aria-label={`Switch language to ${label}`}
-                    className="text-xs font-semibold text-white/50 hover:text-white transition-colors px-1.5"
-                  >
-                    {label}
-                  </a>
-                ))}
+              <div className={`flex items-center gap-0.5 border-l ${divider} pl-6 ml-1`}>
+                {/* pill container */}
+                <div
+                  className={`flex items-center gap-0.5 rounded-full px-1 py-1 transition-colors ${
+                    scrolled ? "bg-black/6 border border-black/8" : "bg-white/10 border border-white/18"
+                  }`}
+                >
+                  {allLocaleLinks.map(({ code, short, label, href, active }) => (
+                    <a
+                      key={code}
+                      href={href}
+                      aria-label={`Switch language to ${label}`}
+                      className={`flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-semibold transition-all ${
+                        active
+                          ? scrolled
+                            ? "bg-brand text-white shadow-sm"
+                            : "bg-white/95 text-brand shadow-sm"
+                          : `${navSubText} ${navHover}`
+                      }`}
+                    >
+                      <Flag code={short} />
+                      {label}
+                    </a>
+                  ))}
+                </div>
               </div>
             )}
 
             {/* CTA button */}
             {ctaLabel && (
-              ctaLink ? (
-                <a
-                  href={ctaLink}
-                  className="inline-flex items-center gap-2 rounded-md bg-primary text-brand px-5 py-2.5 text-sm font-bold transition-all hover:bg-primary-hover hover:shadow-md ml-2"
-                >
-                  {ctaLabel}
-                  <ArrowIcon />
-                </a>
-              ) : (
-                <button
-                  type="button"
-                  onClick={handleOpenChat}
-                  className="inline-flex items-center gap-2 rounded-md bg-primary text-brand px-5 py-2.5 text-sm font-bold transition-all hover:bg-primary-hover hover:shadow-md ml-2"
-                >
-                  {ctaLabel}
-                  <ArrowIcon />
-                </button>
-              )
+              <div className="ml-1">
+                {ctaLink ? (
+                  <a
+                    href={ctaLink}
+                    className={`inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold transition-all ${
+                      scrolled
+                        ? "bg-primary text-brand hover:bg-primary-hover hover:shadow-md"
+                        : "bg-white/12 border border-white/25 text-white hover:bg-white/22 hover:border-white/45"
+                    }`}
+                  >
+                    {ctaLabel}
+                    <ArrowIcon />
+                  </a>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={handleOpenChat}
+                    className={`inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold transition-all ${
+                      scrolled
+                        ? "bg-primary text-brand hover:bg-primary-hover hover:shadow-md"
+                        : "bg-white/12 border border-white/25 text-white hover:bg-white/22 hover:border-white/45"
+                    }`}
+                  >
+                    {ctaLabel}
+                    <ArrowIcon />
+                  </button>
+                )}
+              </div>
             )}
           </div>
 
@@ -139,7 +204,7 @@ const Navigation = ({ data }: NavigationProps) => {
           <div className="lg:hidden">
             <button
               type="button"
-              className="inline-flex items-center justify-center rounded-md p-2 text-white/80 hover:text-white transition-colors"
+              className={`inline-flex items-center justify-center rounded-md p-2 transition-colors ${navSubText} ${navHover}`}
               onClick={() => setMobileMenuOpen(true)}
               aria-label={tr.navOpenMenu}
             >
@@ -154,9 +219,14 @@ const Navigation = ({ data }: NavigationProps) => {
         <div className="fixed inset-0 z-[110] bg-black/50" aria-hidden="true" />
         <Dialog.Panel className="fixed inset-y-0 right-0 z-[120] w-full overflow-y-auto bg-brand px-6 py-6 sm:max-w-sm">
           <div className="flex items-center justify-between mb-8">
-            <a href="/" className="-m-1.5 p-1.5" onClick={() => setMobileMenuOpen(false)}>
+            <a href="/" className="-m-1.5 p-1.5 flex items-center gap-2.5" onClick={() => setMobileMenuOpen(false)}>
+              <span className="w-7 h-7 rounded-full bg-white/12 flex items-center justify-center">
+                <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4 text-white" aria-hidden="true">
+                  <path d="M4 9l1.5-4h9L16 9M4 9H3a1 1 0 00-1 1v2h1m1-3h12m0 0h1a1 1 0 011 1v2h-1m-1-3l.5 3M4 12l-.5 3m0 0h1m11 0h1M6.5 15a1 1 0 100-2 1 1 0 000 2zm7 0a1 1 0 100-2 1 1 0 000 2z" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </span>
               {data.logo ? (
-                <Image image={data.logo} layout="fixed" height={40} width={100} />
+                <Image image={data.logo} layout="fixed" height={28} width={100} />
               ) : (
                 <span className="text-base font-bold text-white">sendoplex</span>
               )}
@@ -189,7 +259,7 @@ const Navigation = ({ data }: NavigationProps) => {
               ctaLink ? (
                 <a
                   href={ctaLink}
-                  className="w-full inline-flex items-center justify-center gap-2 rounded-md bg-primary text-brand px-5 py-3 text-base font-bold hover:bg-primary-hover transition-all mb-4"
+                  className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-primary text-brand px-5 py-3 text-base font-bold hover:bg-primary-hover transition-all mb-4"
                 >
                   {ctaLabel}
                   <ArrowIcon />
@@ -197,7 +267,7 @@ const Navigation = ({ data }: NavigationProps) => {
               ) : (
                 <button
                   type="button"
-                  className="w-full inline-flex items-center justify-center gap-2 rounded-md bg-primary text-brand px-5 py-3 text-base font-bold hover:bg-primary-hover transition-all mb-4"
+                  className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-primary text-brand px-5 py-3 text-base font-bold hover:bg-primary-hover transition-all mb-4"
                   onClick={handleOpenChatFromMobile}
                 >
                   {ctaLabel}
@@ -205,15 +275,18 @@ const Navigation = ({ data }: NavigationProps) => {
                 </button>
               )
             )}
+
             {showSwitcher && (
-              <div className="flex justify-start gap-4 mt-2">
-                {localeLinks.map(({ code, label, href }) => (
+              <div className="flex items-center gap-2 mt-2 flex-wrap">
+                {allLocaleLinks.map(({ code, short, label, href, active }) => (
                   <a
                     key={code}
                     href={href}
-                    aria-label={`Switch language to ${label}`}
-                    className="text-sm font-semibold text-white/50 hover:text-white transition-colors"
+                    className={`flex items-center gap-1.5 text-sm font-semibold transition-colors px-2 py-1 rounded-md ${
+                      active ? "text-white bg-white/15" : "text-white/45 hover:text-white"
+                    }`}
                   >
+                    <Flag code={short} />
                     {label}
                   </a>
                 ))}

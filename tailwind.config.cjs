@@ -41,7 +41,7 @@ module.exports = {
       },
       fontFamily: {
         mulish: ["Mulish", "sans-serif"],
-        serif:  ["Georgia", "Cambria", "'Times New Roman'", "Times", "serif"],
+        serif:  ["'Instrument Serif'", "Georgia", "Cambria", "serif"],
       },
       fontSize: {
         "section-title": ["3rem", { lineHeight: "1.1" }],

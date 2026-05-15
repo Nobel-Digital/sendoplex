@@ -52,7 +52,9 @@
     "c_hoursTitle",
     "c_basicFormTitle",
     "c_basicFormDescription",
-    "c_faqTitle"
+    "c_faqTitle",
+    "c_trustItemLabels",
+    "c_trustItemValues"
   ],
   "required": []
 }

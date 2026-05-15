@@ -1,0 +1,9 @@
+{
+  "$id": "c_trustItemValues",
+  "$schema": "https://schema.yext.com/config/km/field/v1",
+  "displayName": "Trust Item Values",
+  "group": "NONE",
+  "localization": "LOCALE_SPECIFIC",
+  "typeId": "list",
+  "type": { "listType": { "typeId": "string", "type": { "stringType": { "stereotype": "SIMPLE" } } } }
+}
