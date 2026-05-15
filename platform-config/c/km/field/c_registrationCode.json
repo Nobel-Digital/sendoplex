@@ -4,5 +4,7 @@
   "displayName": "Registration Code",
   "group": "NONE",
   "localization": "PRIMARY_ONLY",
-  "typeId": "string"
+  "type": {
+    "stringType": {}
+  }
 }

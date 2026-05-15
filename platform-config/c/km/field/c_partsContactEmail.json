@@ -4,5 +4,7 @@
   "displayName": "Parts Contact Email",
   "group": "NONE",
   "localization": "PRIMARY_ONLY",
-  "typeId": "string"
+  "type": {
+    "stringType": {}
+  }
 }

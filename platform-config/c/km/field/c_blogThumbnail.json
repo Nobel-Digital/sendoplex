@@ -4,5 +4,7 @@
   "displayName": "Blog Thumbnail",
   "group": "NONE",
   "localization": "PRIMARY_ONLY",
-  "typeId": "image"
+  "type": {
+    "imageType": {}
+  }
 }

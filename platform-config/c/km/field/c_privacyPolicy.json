@@ -4,5 +4,7 @@
   "displayName": "Privacy Policy URL",
   "group": "NONE",
   "localization": "PRIMARY_ONLY",
-  "typeId": "string"
+  "type": {
+    "stringType": {}
+  }
 }

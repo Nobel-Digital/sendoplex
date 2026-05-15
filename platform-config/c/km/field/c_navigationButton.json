@@ -4,5 +4,7 @@
   "displayName": "Navigation Button",
   "group": "NONE",
   "localization": "LOCALE_SPECIFIC",
-  "typeId": "cta"
+  "type": {
+    "ctaType": {}
+  }
 }

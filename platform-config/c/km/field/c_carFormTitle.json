@@ -4,5 +4,7 @@
   "displayName": "Car Form Title",
   "group": "NONE",
   "localization": "LOCALE_SPECIFIC",
-  "typeId": "string"
+  "type": {
+    "stringType": {}
+  }
 }

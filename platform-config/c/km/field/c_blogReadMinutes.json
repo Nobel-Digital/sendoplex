@@ -4,5 +4,7 @@
   "displayName": "Blog Read Time (minutes)",
   "group": "NONE",
   "localization": "PRIMARY_ONLY",
-  "typeId": "decimal"
+  "type": {
+    "decimalType": {}
+  }
 }

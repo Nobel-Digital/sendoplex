@@ -4,5 +4,7 @@
   "displayName": "Blog Excerpt",
   "group": "NONE",
   "localization": "LOCALE_SPECIFIC",
-  "typeId": "string"
+  "type": {
+    "stringType": {}
+  }
 }

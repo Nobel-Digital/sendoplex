@@ -4,5 +4,7 @@
   "displayName": "Car Form Testimonial Quote",
   "group": "NONE",
   "localization": "LOCALE_SPECIFIC",
-  "typeId": "string"
+  "type": {
+    "stringType": {}
+  }
 }

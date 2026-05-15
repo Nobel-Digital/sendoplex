@@ -4,5 +4,7 @@
   "displayName": "Contact Section Title 2",
   "group": "NONE",
   "localization": "LOCALE_SPECIFIC",
-  "typeId": "string"
+  "type": {
+    "stringType": {}
+  }
 }

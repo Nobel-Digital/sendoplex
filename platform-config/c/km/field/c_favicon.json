@@ -4,5 +4,7 @@
   "displayName": "Favicon",
   "group": "NONE",
   "localization": "PRIMARY_ONLY",
-  "typeId": "image"
+  "type": {
+    "imageType": {}
+  }
 }

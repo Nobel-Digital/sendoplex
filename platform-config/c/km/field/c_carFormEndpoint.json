@@ -4,5 +4,7 @@
   "displayName": "Car Form Endpoint URL",
   "group": "NONE",
   "localization": "PRIMARY_ONLY",
-  "typeId": "string"
+  "type": {
+    "stringType": {}
+  }
 }

@@ -4,5 +4,7 @@
   "displayName": "About Description",
   "group": "NONE",
   "localization": "LOCALE_SPECIFIC",
-  "typeId": "richTextV2"
+  "type": {
+    "richTextV2Type": {}
+  }
 }

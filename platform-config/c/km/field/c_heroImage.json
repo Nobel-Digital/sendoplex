@@ -4,5 +4,7 @@
   "displayName": "Hero Image",
   "group": "NONE",
   "localization": "PRIMARY_ONLY",
-  "typeId": "image"
+  "type": {
+    "imageType": {}
+  }
 }

@@ -4,10 +4,11 @@
   "displayName": "Available Locales",
   "group": "NONE",
   "localization": "PRIMARY_ONLY",
-  "typeId": "list",
   "type": {
     "listType": {
-      "typeId": "string"
+      "type": {
+        "stringType": {}
+      }
     }
   }
 }
