@@ -12,31 +12,79 @@
     },
     "addressHidden": false,
     "description": "Sendoplex ostab autosid kiiresti ja ausa hinnaga — pakkumine ühe tunni jooksul, raha samal päeval. Soovid müüa oma auto? Saada andmed ja saa aus pakkumine.",
-    "emails": ["tere@sendoplex.ee"],
+    "emails": [
+      "tere@sendoplex.ee"
+    ],
     "mainPhone": "+37255500000",
     "instagramHandle": "sendoplex",
     "facebookPageUrl": "https://facebook.com/sendoplex",
     "hours": {
-      "monday":    { "openIntervals": [{ "start": "09:00", "end": "18:00" }] },
-      "tuesday":   { "openIntervals": [{ "start": "09:00", "end": "18:00" }] },
-      "wednesday": { "openIntervals": [{ "start": "09:00", "end": "18:00" }] },
-      "thursday":  { "openIntervals": [{ "start": "09:00", "end": "18:00" }] },
-      "friday":    { "openIntervals": [{ "start": "09:00", "end": "18:00" }] },
-      "saturday":  { "openIntervals": [{ "start": "10:00", "end": "14:00" }] },
-      "sunday":    { "isClosed": true }
+      "monday": {
+        "openIntervals": [
+          {
+            "start": "09:00",
+            "end": "18:00"
+          }
+        ]
+      },
+      "tuesday": {
+        "openIntervals": [
+          {
+            "start": "09:00",
+            "end": "18:00"
+          }
+        ]
+      },
+      "wednesday": {
+        "openIntervals": [
+          {
+            "start": "09:00",
+            "end": "18:00"
+          }
+        ]
+      },
+      "thursday": {
+        "openIntervals": [
+          {
+            "start": "09:00",
+            "end": "18:00"
+          }
+        ]
+      },
+      "friday": {
+        "openIntervals": [
+          {
+            "start": "09:00",
+            "end": "18:00"
+          }
+        ]
+      },
+      "saturday": {
+        "openIntervals": [
+          {
+            "start": "10:00",
+            "end": "14:00"
+          }
+        ]
+      },
+      "sunday": {
+        "isClosed": true
+      }
     },
     "slug": "index.html",
     "timezone": "Europe/Tallinn",
-
     "c_registrationCode": "16842301",
     "c_vatNumber": "EE102841730",
-    "c_availableLocales": ["et", "en", "fi", "ru"],
-
+    "c_availableLocales": [
+      "et",
+      "en",
+      "fi",
+      "ru"
+    ],
     "c_navigationButton": {
       "label": "Paku oma autot",
       "link": "#form"
     },
-
     "c_heroSlogan": "Auto kokkuost & varuosad · Eestis ja Soomes",
     "c_heroDescription": "Müü oma auto. Või leia varuosa.",
     "c_heroButton": {
@@ -50,33 +98,9 @@
     "c_heroStatKicker": "Iga kuu ostame",
     "c_heroStatNumber": "~120",
     "c_heroStatLabel": "autot Eestis ja Soomes",
-    "c_heroTrustItems": [
-      { "label": "Pakkumine", "value": "1 h jooksul" },
-      { "label": "Tasumine",  "value": "Sularahas või kontole" },
-      { "label": "Vormistus", "value": "Tasuta, samal päeval" },
-      { "label": "Sõidame järele", "value": "Kogu Eesti, Soome" }
-    ],
-
     "c_partsSectionTitle": "Otsid varuosi? Aitame leida.",
     "c_partsSectionDescription": "Pikkade aastate jooksul oleme leidnud kaks platvormi, mida tasub Eestis kõige rohkem usaldada. Allpool ka populaarsemad kategooriad — ja kui osa ei leia, võta meiega ühendust.",
     "c_partsContactEmail": "varuosad@sendoplex.ee",
-    "c_partnerPlatforms": [
-      {
-        "name": "eBay",
-        "iconLabel": "eB",
-        "description": "Lai valik kasutatud ja uusi varuosi rahvusvahelistelt müüjatelt.",
-        "url": "https://www.ebay.com",
-        "tags": ["Originaal & järelturg", "Rahvusvaheline", "Haruldased osad"]
-      },
-      {
-        "name": "Autodoc.ee",
-        "iconLabel": "AD",
-        "description": "Eestikeelne tugi, kiire kohaletoimetamine ja lai mudelivalik.",
-        "url": "https://www.autodoc.ee",
-        "tags": ["Eestikeelne", "1–3 päeva", "Originaal & OEM"]
-      }
-    ],
-
     "c_carFormTitle": "Saada andmed, saa aus pakkumine.",
     "c_carFormDescription": "Täida vorm — ühe tunni jooksul tööajal saadame Sulle e-kirjaga hinnapakkumise. Pakkumine on tasuta ja Sind ei kohusta millekski.",
     "c_carFormBullets": [
@@ -88,19 +112,11 @@
     "c_carFormTestimonialQuote": "Helistasin neljapäeval, reedel oli auto müüdud ja raha kontol. Lihtsam kui Auto24-s kuulutust hoida.",
     "c_carFormTestimonialAuthor": "Marek K.",
     "c_carFormTestimonialMeta": "VW Passat, 2014 · Tartu · 3 nädalat tagasi",
-
     "c_aboutTitle": "Päris inimesed, aus käepigistus.",
     "c_aboutSignature": "— Kristjan & Mariliis",
     "c_aboutFounderLabel": "Sendoplex OÜ asutajad",
-    "c_aboutStats": [
-      { "number": "9 a",   "label": "Kogemust autoturul Eestis ja Soomes" },
-      { "number": "2 800+", "label": "Autot ostetud ja edasi müüdud" },
-      { "number": "4.8",   "label": "Keskmine hinnang Google'is (412 arvustust)" }
-    ],
-
     "c_blogSectionTitle": "Auto müügist arusaadavalt.",
     "c_blogSectionDescription": "Vahel on kõige kasulikum see, mida müüja Sulle ei räägi. Kogume kokku küsimused, mida kliendid kõige sagedamini esitavad — ja vastame ausalt.",
-
     "c_contactSectionTitle1": "Helista, kirjuta või tule läbi.",
     "c_contactSectionTitle2": "Vastame tööajal hiljemalt 30 minuti jooksul.",
     "c_contactSectionTitle3": "Sotsiaalmeedia"
