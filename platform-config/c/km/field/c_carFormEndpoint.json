@@ -1,0 +1,8 @@
+{
+  "$id": "c_carFormEndpoint",
+  "$schema": "https://schema.yext.com/config/km/field/v1",
+  "displayName": "Car Form Endpoint URL",
+  "group": "NONE",
+  "localization": "PRIMARY_ONLY",
+  "typeId": "yext/url"
+}

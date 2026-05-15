@@ -1,0 +1,9 @@
+{
+  "$id": "c_availableLocales",
+  "$schema": "https://schema.yext.com/config/km/field/v1",
+  "displayName": "Available Locales",
+  "group": "NONE",
+  "localization": "PRIMARY_ONLY",
+  "typeId": "yext/list",
+  "listTypeId": "yext/text"
+}

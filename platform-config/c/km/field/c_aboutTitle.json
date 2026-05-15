@@ -1,0 +1,8 @@
+{
+  "$id": "c_aboutTitle",
+  "$schema": "https://schema.yext.com/config/km/field/v1",
+  "displayName": "About Title",
+  "group": "NONE",
+  "localization": "LOCALE_AND_LANGUAGE",
+  "typeId": "yext/text"
+}

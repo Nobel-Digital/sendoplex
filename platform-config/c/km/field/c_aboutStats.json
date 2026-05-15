@@ -1,0 +1,9 @@
+{
+  "$id": "c_aboutStats",
+  "$schema": "https://schema.yext.com/config/km/field/v1",
+  "displayName": "About Stats",
+  "group": "NONE",
+  "localization": "LOCALE_AND_LANGUAGE",
+  "typeId": "yext/list",
+  "listTypeId": "c_statItem"
+}

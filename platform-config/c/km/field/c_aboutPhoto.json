@@ -1,0 +1,8 @@
+{
+  "$id": "c_aboutPhoto",
+  "$schema": "https://schema.yext.com/config/km/field/v1",
+  "displayName": "About / Team Photo",
+  "group": "NONE",
+  "localization": "PRIMARY_ONLY",
+  "typeId": "yext/image"
+}

@@ -1,0 +1,8 @@
+{
+  "$id": "c_registrationCode",
+  "$schema": "https://schema.yext.com/config/km/field/v1",
+  "displayName": "Registration Code",
+  "group": "NONE",
+  "localization": "PRIMARY_ONLY",
+  "typeId": "yext/text"
+}

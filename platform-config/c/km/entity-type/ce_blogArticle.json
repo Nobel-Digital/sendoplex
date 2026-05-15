@@ -1,0 +1,6 @@
+{
+  "$id": "ce_blogArticle",
+  "$schema": "https://schema.yext.com/config/km/entity-type/v1",
+  "displayName": "Blog Article",
+  "description": "A blog post linked to the main location entity"
+}

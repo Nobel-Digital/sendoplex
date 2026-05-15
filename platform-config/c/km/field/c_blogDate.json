@@ -1,0 +1,8 @@
+{
+  "$id": "c_blogDate",
+  "$schema": "https://schema.yext.com/config/km/field/v1",
+  "displayName": "Blog Publish Date",
+  "group": "NONE",
+  "localization": "PRIMARY_ONLY",
+  "typeId": "yext/date"
+}

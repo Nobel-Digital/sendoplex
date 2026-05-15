@@ -1,0 +1,8 @@
+{
+  "$id": "c_partsContactEmail",
+  "$schema": "https://schema.yext.com/config/km/field/v1",
+  "displayName": "Parts Contact Email",
+  "group": "NONE",
+  "localization": "PRIMARY_ONLY",
+  "typeId": "yext/text"
+}

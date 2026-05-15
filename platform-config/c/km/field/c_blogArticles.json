@@ -1,0 +1,12 @@
+{
+  "$id": "c_blogArticles",
+  "$schema": "https://schema.yext.com/config/km/field/v1",
+  "displayName": "Blog Articles",
+  "group": "NONE",
+  "localization": "PRIMARY_ONLY",
+  "typeId": "yext/entityRelation",
+  "entityRelation": {
+    "entityTypeIds": ["ce_blogArticle"],
+    "supportedRelationships": ["LINKED"]
+  }
+}

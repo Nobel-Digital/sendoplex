@@ -1,0 +1,8 @@
+{
+  "$id": "c_contactSectionTitle1",
+  "$schema": "https://schema.yext.com/config/km/field/v1",
+  "displayName": "Contact Section Title 1",
+  "group": "NONE",
+  "localization": "LOCALE_AND_LANGUAGE",
+  "typeId": "yext/text"
+}
