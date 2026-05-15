@@ -2,13 +2,5 @@
   "$id": "blogArticle",
   "$schema": "https://schema.yext.com/config/km/entity-type-extension/v1",
   "enabled": true,
-  "entityType": "ce_blogArticle",
-  "fields": [
-    "slug",
-    "c_blogExcerpt",
-    "c_blogDate",
-    "c_blogReadMinutes",
-    "c_blogCategory",
-    "c_blogThumbnail"
-  ]
+  "entityType": "ce_blogArticle"
 }

@@ -4,5 +4,5 @@
   "displayName": "Car Form Endpoint URL",
   "group": "NONE",
   "localization": "PRIMARY_ONLY",
-  "typeId": "yext/url"
+  "typeId": "url"
 }

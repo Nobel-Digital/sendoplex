@@ -4,5 +4,5 @@
   "displayName": "Blog Publish Date",
   "group": "NONE",
   "localization": "PRIMARY_ONLY",
-  "typeId": "yext/date"
+  "typeId": "date"
 }

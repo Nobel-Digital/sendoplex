@@ -4,6 +4,10 @@
   "displayName": "Available Locales",
   "group": "NONE",
   "localization": "PRIMARY_ONLY",
-  "typeId": "yext/list",
-  "listTypeId": "yext/text"
+  "typeId": "list",
+  "type": {
+    "listType": {
+      "typeId": "string"
+    }
+  }
 }

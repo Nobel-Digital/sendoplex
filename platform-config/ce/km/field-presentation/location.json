@@ -382,20 +382,7 @@
       "defaultCollapsed": true,
       "displayName": "Knowledge Assistant",
       "entryType": "SECTION",
-      "fields": [
-        {
-          "id": "primaryConversationContact"
-        },
-        {
-          "id": "holidayHoursConversationEnabled"
-        },
-        {
-          "id": "reviewResponseConversationEnabled"
-        },
-        {
-          "id": "nudgeEnabled"
-        }
-      ]
+      "fields": []
     }
   ]
 }

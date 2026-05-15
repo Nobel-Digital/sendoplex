@@ -2,11 +2,11 @@
   "$id": "c_platformCard",
   "$schema": "https://schema.yext.com/config/km/field-type/v1",
   "displayName": "Partner Platform Card",
-  "fields": [
-    { "id": "name",        "typeId": "yext/text" },
-    { "id": "iconLabel",   "typeId": "yext/text" },
-    { "id": "description", "typeId": "yext/text" },
-    { "id": "url",         "typeId": "yext/url"  },
-    { "id": "tags",        "typeId": "yext/list", "listTypeId": "yext/text" }
+  "properties": [
+    { "name": "name",        "typeId": "string" },
+    { "name": "iconLabel",   "typeId": "string" },
+    { "name": "description", "typeId": "string" },
+    { "name": "url",         "typeId": "url"    },
+    { "name": "tags",        "typeId": "list",  "type": { "listType": { "typeId": "string" } } }
   ]
 }

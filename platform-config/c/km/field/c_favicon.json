@@ -4,5 +4,5 @@
   "displayName": "Favicon",
   "group": "NONE",
   "localization": "PRIMARY_ONLY",
-  "typeId": "yext/image"
+  "typeId": "image"
 }

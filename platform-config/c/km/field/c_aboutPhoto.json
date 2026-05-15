@@ -4,5 +4,5 @@
   "displayName": "About / Team Photo",
   "group": "NONE",
   "localization": "PRIMARY_ONLY",
-  "typeId": "yext/image"
+  "typeId": "image"
 }

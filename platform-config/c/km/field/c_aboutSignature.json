@@ -4,5 +4,5 @@
   "displayName": "About Founders Signature",
   "group": "NONE",
   "localization": "PRIMARY_ONLY",
-  "typeId": "yext/text"
+  "typeId": "string"
 }

@@ -90,14 +90,7 @@
       "defaultCollapsed": true,
       "displayName": "Knowledge Assistant",
       "entryType": "SECTION",
-      "fields": [
-        {
-          "id": "primaryConversationContact"
-        },
-        {
-          "id": "nudgeEnabled"
-        }
-      ]
+      "fields": []
     }
   ]
 }

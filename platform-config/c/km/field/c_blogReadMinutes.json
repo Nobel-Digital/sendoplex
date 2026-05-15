@@ -4,5 +4,5 @@
   "displayName": "Blog Read Time (minutes)",
   "group": "NONE",
   "localization": "PRIMARY_ONLY",
-  "typeId": "yext/integer"
+  "typeId": "decimal"
 }

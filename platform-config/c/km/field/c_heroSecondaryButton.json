@@ -3,6 +3,6 @@
   "$schema": "https://schema.yext.com/config/km/field/v1",
   "displayName": "Hero Secondary Button",
   "group": "NONE",
-  "localization": "LOCALE_AND_LANGUAGE",
-  "typeId": "yext/cta"
+  "localization": "LOCALE_SPECIFIC",
+  "typeId": "cta"
 }

@@ -3,6 +3,6 @@
   "$schema": "https://schema.yext.com/config/km/field/v1",
   "displayName": "Hero Slogan",
   "group": "NONE",
-  "localization": "LOCALE_AND_LANGUAGE",
-  "typeId": "yext/text"
+  "localization": "LOCALE_SPECIFIC",
+  "typeId": "string"
 }
