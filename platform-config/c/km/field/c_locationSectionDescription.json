@@ -1,0 +1,9 @@
+{
+  "$id": "c_locationSectionDescription",
+  "$schema": "https://schema.yext.com/config/km/field/v1",
+  "displayName": "Location Section Description",
+  "group": "NONE",
+  "localization": "LOCALE_SPECIFIC",
+  "typeId": "string",
+  "type": { "stringType": { "stereotype": "MULTILINE" } }
+}

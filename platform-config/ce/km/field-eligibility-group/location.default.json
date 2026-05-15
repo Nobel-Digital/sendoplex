@@ -38,7 +38,25 @@
     "c_contactSectionTitle1",
     "c_contactSectionTitle2",
     "c_contactSectionTitle3",
-    "c_mapIframe"
+    "c_mapIframe",
+    "c_heroTrustItems",
+    "c_partnerPlatforms",
+    "c_aboutStats",
+    "c_blogArticles",
+    "c_locationSectionTitle",
+    "c_locationSectionDescription",
+    "c_whySectionTitle",
+    "c_whyItems",
+    "c_featuredserviceTitle",
+    "c_featuredServiceItems",
+    "c_simpleServicesproductsList",
+    "c_simpleServicesproductsTitle",
+    "c_photoGalleryTitle",
+    "c_hoursTitle",
+    "c_basicFormTitle",
+    "c_basicFormDescription",
+    "c_faqTitle",
+    "c_faqList"
   ],
   "required": []
 }

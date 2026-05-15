@@ -1,0 +1,9 @@
+{
+  "$id": "c_simpleServicesproductsTitle",
+  "$schema": "https://schema.yext.com/config/km/field/v1",
+  "displayName": "Simple Services / Products Title",
+  "group": "NONE",
+  "localization": "LOCALE_SPECIFIC",
+  "typeId": "string",
+  "type": { "stringType": { "stereotype": "SIMPLE" } }
+}

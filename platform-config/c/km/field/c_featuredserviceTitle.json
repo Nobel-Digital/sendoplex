@@ -1,0 +1,9 @@
+{
+  "$id": "c_featuredserviceTitle",
+  "$schema": "https://schema.yext.com/config/km/field/v1",
+  "displayName": "Featured Service Title",
+  "group": "NONE",
+  "localization": "LOCALE_SPECIFIC",
+  "typeId": "string",
+  "type": { "stringType": { "stereotype": "SIMPLE" } }
+}
