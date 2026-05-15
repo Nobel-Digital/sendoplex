@@ -1,9 +1,0 @@
-{
-  "$id": "c_statItem",
-  "$schema": "https://schema.yext.com/config/km/field-type/v1",
-  "displayName": "Stat Item",
-  "properties": [
-    { "name": "number", "typeId": "string" },
-    { "name": "label",  "typeId": "string" }
-  ]
-}

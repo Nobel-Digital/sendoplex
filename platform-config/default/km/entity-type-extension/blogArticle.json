@@ -1,6 +1,0 @@
-{
-  "$id": "blogArticle",
-  "$schema": "https://schema.yext.com/config/km/entity-type-extension/v1",
-  "enabled": true,
-  "entityType": "ce_blogArticle"
-}

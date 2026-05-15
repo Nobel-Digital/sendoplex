@@ -1,9 +1,0 @@
-{
-  "$id": "c_trustItem",
-  "$schema": "https://schema.yext.com/config/km/field-type/v1",
-  "displayName": "Trust Item",
-  "properties": [
-    { "name": "label", "typeId": "string" },
-    { "name": "value", "typeId": "string" }
-  ]
-}
