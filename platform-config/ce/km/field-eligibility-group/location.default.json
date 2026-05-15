@@ -46,17 +46,13 @@
     "c_locationSectionTitle",
     "c_locationSectionDescription",
     "c_whySectionTitle",
-    "c_whyItems",
     "c_featuredserviceTitle",
-    "c_featuredServiceItems",
-    "c_simpleServicesproductsList",
     "c_simpleServicesproductsTitle",
     "c_photoGalleryTitle",
     "c_hoursTitle",
     "c_basicFormTitle",
     "c_basicFormDescription",
-    "c_faqTitle",
-    "c_faqList"
+    "c_faqTitle"
   ],
   "required": []
 }
