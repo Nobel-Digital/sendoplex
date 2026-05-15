@@ -6,5 +6,6 @@
   "localization": "PRIMARY_ONLY",
   "type": {
     "dateType": {}
-  }
+  },
+  "typeId": "date"
 }

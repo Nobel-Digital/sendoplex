@@ -5,6 +5,9 @@
   "group": "NONE",
   "localization": "PRIMARY_ONLY",
   "type": {
-    "imageType": {}
-  }
+    "imageType": {
+      "unconstrainedAspectRatioAllowed": true
+    }
+  },
+  "typeId": "image"
 }

@@ -4,7 +4,5 @@
   "displayName": "Hero Primary Button",
   "group": "NONE",
   "localization": "LOCALE_SPECIFIC",
-  "type": {
-    "ctaType": {}
-  }
+  "typeId": "cta"
 }

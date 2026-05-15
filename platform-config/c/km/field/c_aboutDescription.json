@@ -6,5 +6,6 @@
   "localization": "LOCALE_SPECIFIC",
   "type": {
     "richTextV2Type": {}
-  }
+  },
+  "typeId": "richTextV2"
 }

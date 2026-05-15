@@ -6,9 +6,13 @@
   "localization": "LOCALE_SPECIFIC",
   "type": {
     "listType": {
+      "typeId": "string",
       "type": {
-        "stringType": {}
+        "stringType": {
+          "stereotype": "SIMPLE"
+        }
       }
     }
-  }
+  },
+  "typeId": "list"
 }

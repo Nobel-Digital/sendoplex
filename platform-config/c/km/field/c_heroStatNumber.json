@@ -5,6 +5,9 @@
   "group": "NONE",
   "localization": "PRIMARY_ONLY",
   "type": {
-    "stringType": {}
-  }
+    "stringType": {
+      "stereotype": "SIMPLE"
+    }
+  },
+  "typeId": "string"
 }
