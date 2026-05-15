@@ -10,8 +10,5 @@
   "buildHooks": {
     "buildCommand": "npm run build",
     "installDepsCommand": "npm install"
-  },
-  "system": {
-    "npmLockFile": "package-lock.json"
   }
 }
