@@ -92,14 +92,25 @@ const ContactSection = ({
 }: ContactSectionProps) => {
   const contactPhone = phone || mobilePhone;
 
-  const iframeHtml = c_mapIframe?.json?.root?.children?.[0]?.children?.[0]?.text || "";
+  // c_mapIframe is a plain MULTILINE string — accept either:
+  //   a) a full Google Maps embed URL  (https://www.google.com/maps/embed?pb=…)
+  //   b) a raw <iframe …> snippet — src attribute is extracted via regex
   const iframeSrc = (() => {
-    const match = iframeHtml.match(/src=["']([^"']+)["']/i);
-    if (!match) return null;
-    try {
-      const url = new URL(match[1]);
-      return url.protocol === "https:" ? url.href : null;
-    } catch { return null; }
+    const raw: string = typeof c_mapIframe === "string" ? c_mapIframe.trim() : "";
+    if (!raw) return null;
+    // If the user pasted a bare URL
+    if (raw.startsWith("https://")) {
+      try { new URL(raw); return raw; } catch { return null; }
+    }
+    // If the user pasted the full <iframe …> embed HTML
+    const match = raw.match(/src=["']([^"']+)["']/i);
+    if (match) {
+      try {
+        const url = new URL(match[1]);
+        return url.protocol === "https:" ? url.href : null;
+      } catch { return null; }
+    }
+    return null;
   })();
 
   const addressLine = address
