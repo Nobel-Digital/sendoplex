@@ -67,10 +67,9 @@ export interface SchemaProps {
 }
 
 /**
- * Ristipartner OÜ (electromechanical manufacturing) schema
- * - LocalBusiness (+ ManufacturingBusiness via additionalType)
- * - OfferCatalog of Products mapped from c_featuredServiceItems (entity type: ce_featuredService)
- * - Pricing: prefers explicit `price` field, but can ALSO parse pricing tables embedded in c_serviceDetailedDescription HTML
+ * Sendoplex schema
+ * - LocalBusiness (automotive car buying service)
+ * - OfferCatalog of Products mapped from c_featuredServiceItems
  * - Optional FAQPage
  */
 const Schema = ({ data }: SchemaProps) => {
@@ -260,7 +259,7 @@ const Schema = ({ data }: SchemaProps) => {
         item={{
           "@context": "https://schema.org",
           "@type": "LocalBusiness",
-          additionalType: "https://schema.org/ManufacturingBusiness",
+          additionalType: "https://schema.org/AutomotiveBusiness",
           name,
           ...(url ? { url } : {}),
           ...(logo ? { logo } : {}),
