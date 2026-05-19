@@ -66,7 +66,15 @@ const Footer = ({
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-10">
           {/* Col 1 — Brand */}
           <div className="col-span-2 md:col-span-1">
-            <p className="text-lg font-bold tracking-tight text-white mb-3">sendoplex</p>
+            <div className="flex items-center gap-2.5 mb-3">
+              <span className="w-7 h-7 rounded-full bg-white/12 flex items-center justify-center shrink-0">
+                <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4 text-white" aria-hidden="true">
+                  <path d="M4 9l1.5-4h9L16 9M4 9H3a1 1 0 00-1 1v2h1m1-3h12m0 0h1a1 1 0 011 1v2h-1m-1-3l.5 3M4 12l-.5 3m0 0h1m11 0h1M6.5 15a1 1 0 100-2 1 1 0 000 2zm7 0a1 1 0 100-2 1 1 0 000 2z"
+                    stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </span>
+              <p className="text-lg font-bold tracking-tight text-white">sendoplex</p>
+            </div>
             <p className="text-xs text-white/50 leading-relaxed max-w-[26ch]">
               Auto kokkuost Eestis ja Soomes. Aus hindamine, kiire vormistus, raha samal päeval.
             </p>

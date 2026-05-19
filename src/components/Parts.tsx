@@ -70,6 +70,23 @@ function getLocale(obj: LocaleString, locale: string): string {
   return obj.et;
 }
 
+/** Parses _word_ → Instrument Serif italic (same convention as Banner headline) */
+function parseItalic(text: string): React.ReactNode {
+  return text.split(/(_[^_]+_)/g).map((part, i) =>
+    part.startsWith("_") && part.endsWith("_") ? (
+      <em
+        key={i}
+        style={{ fontFamily: "'Instrument Serif', Georgia, serif" }}
+        className="not-italic italic text-white"
+      >
+        {part.slice(1, -1)}
+      </em>
+    ) : (
+      <span key={i}>{part}</span>
+    )
+  );
+}
+
 const ArrowIcon = () => (
   <svg viewBox="0 0 16 16" fill="none" className="w-4 h-4 shrink-0" aria-hidden="true">
     <path d="M3 8h10m0 0L9 4m4 4l-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
@@ -99,9 +116,10 @@ const Parts: React.FC<PartsProps> = ({
   locale = "et",
 }) => {
   const tr = t(locale);
-
-  // Use CMS platforms if provided, otherwise fall back to defaults
   const hasCmsPlatforms = Array.isArray(c_partnerPlatforms) && c_partnerPlatforms.length > 0;
+
+  // Section title: supports _word_ italic serif convention (e.g. "Otsid _varuosi?_ Aitame leida.")
+  const titleNode = c_partsSectionTitle ? parseItalic(c_partsSectionTitle) : null;
 
   return (
     <section className="bg-brand text-white" id="varuosad">
@@ -110,12 +128,13 @@ const Parts: React.FC<PartsProps> = ({
         {/* Section header */}
         <div className="flex flex-col md:flex-row md:items-start md:gap-16 mb-12">
           <div className="flex-1">
+            {/* Eyebrow: always "VARUOSAD · SOOVITAME" — distinct from the platforms sub-label */}
             <span className="inline-block text-xs font-semibold tracking-widest uppercase text-primary mb-4 opacity-80">
-              {tr.partsRecommended}
+              VARUOSAD · SOOVITAME
             </span>
-            {c_partsSectionTitle && (
+            {titleNode && (
               <h2 className="text-section-title font-bold text-white leading-tight">
-                {c_partsSectionTitle}
+                {titleNode}
               </h2>
             )}
           </div>
@@ -126,7 +145,7 @@ const Parts: React.FC<PartsProps> = ({
           )}
         </div>
 
-        {/* Partner platforms */}
+        {/* Sub-label row */}
         <div className="flex items-center justify-between mb-4">
           <span className="text-xs font-semibold tracking-widest uppercase text-white/40">
             {tr.partsRecommended}
@@ -134,6 +153,7 @@ const Parts: React.FC<PartsProps> = ({
           <span className="text-xs text-white/30 hidden sm:block">{tr.partsNoSponsors}</span>
         </div>
 
+        {/* Platform cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-14">
           {hasCmsPlatforms
             ? c_partnerPlatforms!.map((p, i) => (
@@ -150,7 +170,7 @@ const Parts: React.FC<PartsProps> = ({
                         {p.iconLabel}
                       </div>
                       <div>
-                        <p className="font-semibold text-white">{p.name}</p>
+                        <p className="font-semibold text-white text-base">{p.name}</p>
                         {p.description && (
                           <p className="text-xs text-white/55 mt-0.5 leading-snug max-w-xs">{p.description}</p>
                         )}
@@ -163,10 +183,7 @@ const Parts: React.FC<PartsProps> = ({
                   {Array.isArray(p.tags) && p.tags.length > 0 && (
                     <div className="flex flex-wrap gap-2 mt-2">
                       {p.tags.map((tag, j) => (
-                        <span
-                          key={j}
-                          className="rounded-full bg-white/8 px-3 py-1 text-[11px] font-medium text-white/55 border border-white/10"
-                        >
+                        <span key={j} className="rounded-full bg-white/8 px-3 py-1 text-[11px] font-medium text-white/55 border border-white/10">
                           {tag}
                         </span>
                       ))}
@@ -200,10 +217,7 @@ const Parts: React.FC<PartsProps> = ({
                   </div>
                   <div className="flex flex-wrap gap-2 mt-2">
                     {p.tags.map((tag, j) => (
-                      <span
-                        key={j}
-                        className="rounded-full bg-white/8 px-3 py-1 text-[11px] font-medium text-white/55 border border-white/10"
-                      >
+                      <span key={j} className="rounded-full bg-white/8 px-3 py-1 text-[11px] font-medium text-white/55 border border-white/10">
                         {getLocale(tag, locale)}
                       </span>
                     ))}
@@ -212,7 +226,7 @@ const Parts: React.FC<PartsProps> = ({
               ))}
         </div>
 
-        {/* Not found CTA */}
+        {/* Not-found CTA */}
         <div
           id="parts-help"
           className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 rounded-2xl border border-primary/30 bg-white/5 p-8"

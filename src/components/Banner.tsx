@@ -3,6 +3,9 @@ import * as React from "react";
 const FALLBACK_IMAGE =
   "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=2400&q=80&auto=format&fit=crop";
 
+const DEFAULT_SUB_COPY =
+  "Ostame Sinu auto välja kiiresti ja ausa hinnaga — pakkumine ühe tunni jooksul, raha samal päeval. Ning kui otsid varuosa, aitame õige leida Eesti ja Soome lammutuste võrgustikust.";
+
 const DEFAULT_TRUST: Array<{ label: string; value: string }> = [
   { label: "PAKKUMINE",      value: "1h jooksul" },
   { label: "TASUMINE",       value: "Sularahas või kontole" },
@@ -14,8 +17,9 @@ export interface BannerProps {
   c_heroImage?: any;
   c_heroSlogan?: string;
   c_heroDescription?: string;
+  c_heroSubCopy?: string;
   c_heroButton?: { label?: string; link?: string };
-  mainPhone?: string;
+  c_heroSecondaryButton?: { label?: string; link?: string };
   c_heroStatKicker?: string;
   c_heroStatNumber?: string;
   c_heroStatLabel?: string;
@@ -23,18 +27,30 @@ export interface BannerProps {
   c_trustItemValues?: string[];
 }
 
-// Parses _word_ → Instrument Serif italic span
-function parseItalic(text: string): React.ReactNode {
-  const parts = text.split(/(_[^_]+_)/g);
-  return parts.map((part, i) =>
-    part.startsWith("_") && part.endsWith("_") ? (
-      <em key={i} style={{ fontFamily: "'Instrument Serif', Georgia, serif" }} className="not-italic italic text-white/92">
-        {part.slice(1, -1)}
-      </em>
-    ) : (
-      part
-    )
-  );
+/**
+ * Parses text with two conventions:
+ *  - `|`     → <br> (line break within a headline)
+ *  - _word_  → Instrument Serif italic span
+ */
+function parseHeadline(text: string): React.ReactNode {
+  return text.split("|").map((line, lineIdx, lines) => (
+    <React.Fragment key={lineIdx}>
+      {line.split(/(_[^_]+_)/g).map((part, i) =>
+        part.startsWith("_") && part.endsWith("_") ? (
+          <em
+            key={i}
+            style={{ fontFamily: "'Instrument Serif', Georgia, serif" }}
+            className="not-italic italic text-white/92"
+          >
+            {part.slice(1, -1)}
+          </em>
+        ) : (
+          <span key={i}>{part}</span>
+        )
+      )}
+      {lineIdx < lines.length - 1 && <br />}
+    </React.Fragment>
+  ));
 }
 
 const ArrowIcon = () => (
@@ -43,18 +59,13 @@ const ArrowIcon = () => (
   </svg>
 );
 
-const PhoneIcon = () => (
-  <svg viewBox="0 0 16 16" fill="none" className="w-4 h-4 shrink-0" aria-hidden="true">
-    <path d="M2 3.5A1.5 1.5 0 013.5 2h1.172a1 1 0 01.957.713l.643 2.572a1 1 0 01-.293 1l-.9.9a8.02 8.02 0 003.736 3.736l.9-.9a1 1 0 011-.293l2.572.643A1 1 0 0114 11.328V12.5A1.5 1.5 0 0112.5 14C6.701 14 2 9.299 2 3.5z" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
-);
-
 const Banner: React.FC<BannerProps> = ({
   c_heroImage,
   c_heroSlogan,
   c_heroDescription,
+  c_heroSubCopy,
   c_heroButton,
-  mainPhone,
+  c_heroSecondaryButton,
   c_heroStatKicker,
   c_heroStatNumber,
   c_heroStatLabel,
@@ -67,6 +78,12 @@ const Banner: React.FC<BannerProps> = ({
     Array.isArray(c_trustItemLabels) && c_trustItemLabels.length > 0
       ? c_trustItemLabels.map((label, i) => ({ label, value: c_trustItemValues?.[i] ?? "" }))
       : DEFAULT_TRUST;
+
+  // Secondary CTA: use Yext field if set, otherwise always show "Otsi varuosa"
+  const secLabel = c_heroSecondaryButton?.label ?? "Otsi varuosa";
+  const secLink  = c_heroSecondaryButton?.link  ?? "#varuosad";
+
+  const subCopy = c_heroSubCopy ?? DEFAULT_SUB_COPY;
 
   return (
     <section
@@ -93,7 +110,7 @@ const Banner: React.FC<BannerProps> = ({
         aria-hidden="true"
       />
 
-      {/* Main content — grows to fill hero */}
+      {/* Main content */}
       <div className="relative z-10 flex-1 container mx-auto max-w-screen-xl px-6 pt-32 pb-10 flex flex-col justify-end">
         <div className="flex flex-col lg:flex-row lg:items-end lg:gap-16">
 
@@ -111,12 +128,17 @@ const Banner: React.FC<BannerProps> = ({
             {c_heroDescription && (
               <h1
                 className="font-bold text-white leading-[0.93]"
-                style={{ fontSize: "clamp(52px, 8vw, 110px)" }}
+                style={{
+                  fontSize: "clamp(54px, 8.4vw, 116px)",
+                  letterSpacing: "-0.04em",
+                  maxWidth: "14ch",
+                } as React.CSSProperties}
               >
-                {parseItalic(c_heroDescription)}
+                {parseHeadline(c_heroDescription)}
               </h1>
             )}
 
+            {/* CTA row */}
             <div className="flex flex-wrap gap-3 mt-8">
               {c_heroButton?.link && (
                 <a
@@ -127,16 +149,20 @@ const Banner: React.FC<BannerProps> = ({
                   <ArrowIcon />
                 </a>
               )}
-              {mainPhone && (
-                <a
-                  href={`tel:${mainPhone}`}
-                  className="inline-flex items-center gap-2.5 rounded-full border border-white/35 bg-white/8 backdrop-blur-sm text-white px-6 py-3.5 text-sm font-semibold transition-all hover:border-white/65 hover:bg-white/14"
-                >
-                  <PhoneIcon />
-                  {mainPhone}
-                </a>
-              )}
+              {/* Secondary CTA — always "Otsi varuosa" unless overridden */}
+              <a
+                href={secLink}
+                className="inline-flex items-center gap-2.5 rounded-full border border-white/35 bg-white/8 backdrop-blur-sm text-white px-6 py-3.5 text-sm font-semibold transition-all hover:border-white/65 hover:bg-white/14"
+              >
+                {secLabel}
+                <ArrowIcon />
+              </a>
             </div>
+
+            {/* Sub-copy paragraph */}
+            <p className="mt-6 text-white/65 text-sm leading-relaxed max-w-[52ch]">
+              {subCopy}
+            </p>
           </div>
 
           {/* Right — stat block */}
@@ -169,7 +195,10 @@ const Banner: React.FC<BannerProps> = ({
       </div>
 
       {/* Trust strip */}
-      <div className="relative z-10 border-t border-white/14 grid grid-cols-2 md:grid-cols-4">
+      <div
+        className="relative z-10 grid grid-cols-2 md:grid-cols-4"
+        style={{ borderTop: "1px solid rgba(255,255,255,0.18)" }}
+      >
         {trustItems.map((item, i) => (
           <div
             key={i}
@@ -184,7 +213,7 @@ const Banner: React.FC<BannerProps> = ({
             <p className="text-[10px] font-semibold tracking-[0.13em] uppercase text-white/36 mb-1.5">
               {String(i + 1).padStart(2, "0")} — {item.label}
             </p>
-            <p className="text-sm font-medium text-white/85">{item.value}</p>
+            <p className="font-semibold text-white/85" style={{ fontSize: "20px" }}>{item.value}</p>
           </div>
         ))}
       </div>

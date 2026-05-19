@@ -280,7 +280,7 @@ const Location: Template<TemplateRenderProps> = ({ __meta, document }) => {
             c_heroSlogan={c_heroSlogan}
             c_heroDescription={c_heroDescription}
             c_heroButton={c_heroButton}
-            mainPhone={mainPhone}
+            c_heroSecondaryButton={c_heroSecondaryButton}
             c_heroStatKicker={c_heroStatKicker}
             c_heroStatNumber={c_heroStatNumber}
             c_heroStatLabel={c_heroStatLabel}

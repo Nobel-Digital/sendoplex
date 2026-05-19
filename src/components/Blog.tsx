@@ -18,18 +18,52 @@ export interface BlogProps {
   locale?: string;
 }
 
+const DEFAULT_SECTION_TITLE = "Auto müügist arusaadavalt.";
+const DEFAULT_SECTION_DESC  =
+  "Vahel on kõige kasulikum see, mida müüja Sulle ei räägi. Kogume kokku küsimused, mida kliendid meile kõige sagedamini esitavad — ja vastame ausalt.";
+
+const DEFAULT_ARTICLES: BlogArticle[] = [
+  {
+    name: "Kuidas valmistada auto müügiks ette: 7 nõuannet",
+    c_blogCategory: "Müügiõpetus",
+    c_blogDate: "Aprill 2026",
+    c_blogReadMinutes: 5,
+    c_blogExcerpt:
+      "Väike ettevalmistus enne müüki võib lisada autole sadu eurosid. Siin on seitse asja, mida iga müüja peaks teadma.",
+  },
+  {
+    name: "Mis on minu auto tegelik turuhind aastal 2026?",
+    c_blogCategory: "Hindamine",
+    c_blogDate: "Märts 2026",
+    c_blogReadMinutes: 4,
+    c_blogExcerpt:
+      "Autoturul on hinnad muutunud. Vaatame, millest kujuneb sinu auto tegelik väärtus täna ja miks autokauplejate pakkumised tihtipeale erinevad.",
+  },
+  {
+    name: "Eraisik vs. firma: kellele on auto kasulikum müüa?",
+    c_blogCategory: "Nõuanded",
+    c_blogDate: "Veebruar 2026",
+    c_blogReadMinutes: 6,
+    c_blogExcerpt:
+      "KM-kohustus, käibemaks ja läbirääkimisjõud — selgitame, milline müügivariant jätab rohkem raha taskusse.",
+  },
+  {
+    name: "Vana auto käivitusprobleemid talvel: 5 levinumat põhjust",
+    c_blogCategory: "Tehnika",
+    c_blogDate: "Jaanuar 2026",
+    c_blogReadMinutes: 3,
+    c_blogExcerpt:
+      "Külmadel hommikutel keeldub auto käivitumast? Siit leiad kõige sagedasemad põhjused ja mida enne remonditöökotta sõitmist ise kontrollida.",
+  },
+];
+
+const THUMB_COLORS = ["bg-brand", "bg-brand-soft", "bg-brand-tint", "bg-primary/20"];
+
 const ArrowIcon = () => (
   <svg viewBox="0 0 16 16" fill="none" className="w-4 h-4 shrink-0" aria-hidden="true">
     <path d="M3 8h10m0 0L9 4m4 4l-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
-
-const THUMB_COLORS = [
-  "bg-brand",
-  "bg-brand-tint",
-  "bg-brand-soft",
-  "bg-primary/20",
-];
 
 const Blog: React.FC<BlogProps> = ({
   c_blogSectionTitle,
@@ -38,38 +72,42 @@ const Blog: React.FC<BlogProps> = ({
   locale = "et",
 }) => {
   const tr = t(locale);
-  const articles = c_blogArticles ?? [];
 
-  if (articles.length === 0) return null;
+  // Use CMS articles if available, otherwise show placeholders
+  const articles =
+    Array.isArray(c_blogArticles) && c_blogArticles.length > 0
+      ? c_blogArticles
+      : DEFAULT_ARTICLES;
+
+  const sectionTitle = c_blogSectionTitle ?? DEFAULT_SECTION_TITLE;
+  const sectionDesc  = c_blogSectionDescription ?? DEFAULT_SECTION_DESC;
 
   return (
     <section className="bg-background border-b border-divider py-20 px-6 md:px-10" id="blogi">
       <div className="container mx-auto max-w-screen-xl">
+
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-start md:gap-16 mb-12">
           <div className="flex-1">
             <span className="inline-block text-xs font-semibold tracking-widest uppercase text-primary mb-4">
               Blogi ja nõuanded
             </span>
-            {c_blogSectionTitle && (
-              <h2 className="text-section-title font-bold text-foreground leading-tight">
-                {c_blogSectionTitle}
-              </h2>
-            )}
+            <h2 className="text-section-title font-bold text-foreground leading-tight">
+              {sectionTitle}
+            </h2>
           </div>
-          {c_blogSectionDescription && (
-            <p className="mt-6 md:mt-2 md:w-80 text-foreground/55 text-sm leading-relaxed">
-              {c_blogSectionDescription}
-            </p>
-          )}
+          <p className="mt-6 md:mt-2 md:w-80 text-foreground/55 text-sm leading-relaxed">
+            {sectionDesc}
+          </p>
         </div>
 
         {/* Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {articles.map((article, i) => {
-            const href = article.slug ? `/${article.slug}` : "#";
+            const href     = article.slug ? `/${article.slug}` : "#";
             const thumbUrl = article.c_blogThumbnail?.image?.url;
             const thumbAlt = article.c_blogThumbnail?.altText || article.name;
+
             return (
               <a
                 key={i}
@@ -77,7 +115,7 @@ const Blog: React.FC<BlogProps> = ({
                 className="group flex flex-col rounded-2xl border border-divider bg-white overflow-hidden transition-all hover:shadow-md hover:-translate-y-0.5"
               >
                 {/* Thumbnail */}
-                <div className={`aspect-[16/9] overflow-hidden ${!thumbUrl ? THUMB_COLORS[i % THUMB_COLORS.length] : ""}`}>
+                <div className={`aspect-[4/3] overflow-hidden ${!thumbUrl ? THUMB_COLORS[i % THUMB_COLORS.length] : ""}`}>
                   {thumbUrl ? (
                     <img
                       src={thumbUrl}
@@ -86,13 +124,17 @@ const Blog: React.FC<BlogProps> = ({
                       className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                     />
                   ) : (
-                    <div className="w-full h-full" />
+                    <div className="w-full h-full flex items-center justify-center opacity-20">
+                      <svg viewBox="0 0 48 48" fill="none" className="w-10 h-10 text-white" aria-hidden="true">
+                        <path d="M10 22l3-8h22l3 8M10 22H8a2 2 0 00-2 2v5h2m2-7h28m0 0h2a2 2 0 012 2v5h-2m-2-7l1 7M10 29l-1 7m0 0h2m26 0h2M15 36a2 2 0 100-4 2 2 0 000 4zm18 0a2 2 0 100-4 2 2 0 000 4z"
+                          stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </div>
                   )}
                 </div>
 
                 {/* Body */}
                 <div className="flex flex-col flex-1 p-5">
-                  {/* Meta */}
                   <div className="flex items-center gap-2 text-[11px] text-foreground/45 font-medium mb-3 flex-wrap">
                     {article.c_blogCategory && (
                       <span className="rounded-full bg-brand-tint text-brand px-2.5 py-0.5 text-[10px] font-semibold">
@@ -123,16 +165,17 @@ const Blog: React.FC<BlogProps> = ({
           })}
         </div>
 
-        {/* All articles link */}
+        {/* All articles CTA */}
         <div className="mt-10 flex justify-center">
           <a
             href="#"
-            className="inline-flex items-center gap-2 rounded-md border border-foreground/20 text-foreground px-6 py-3 text-sm font-semibold transition-all hover:border-foreground/50 hover:bg-foreground/5"
+            className="inline-flex items-center gap-2 rounded-full border border-foreground/20 text-foreground px-6 py-3 text-sm font-semibold transition-all hover:border-foreground/50 hover:bg-foreground/5"
           >
             {tr.blogAllArticles}
             <ArrowIcon />
           </a>
         </div>
+
       </div>
     </section>
   );

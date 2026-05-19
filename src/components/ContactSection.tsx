@@ -159,25 +159,28 @@ const ContactSection = ({
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Contact card */}
           <div className="rounded-2xl border border-divider bg-white shadow-sm overflow-hidden flex flex-col">
-            {/* Phone CTA */}
+            {/* Phone CTA — full-width pill dark button */}
             {contactPhone && (
               <a
                 href={`tel:${contactPhone}`}
-                className="flex items-center justify-between gap-4 px-8 py-7 border-b border-divider hover:bg-brand-tint transition-colors group"
+                className="flex items-center justify-between gap-3 mx-6 mt-6 mb-2 px-6 py-4 rounded-full bg-brand text-white font-bold text-sm tracking-wide transition-all hover:bg-brand-soft group"
               >
-                <div className="flex items-center gap-5">
-                  <div className="flex items-center justify-center w-11 h-11 rounded-xl bg-brand text-white shrink-0">
-                    <PhoneIcon />
-                  </div>
-                  <div>
-                    <p className="text-xl font-bold text-foreground">{contactPhone}</p>
-                    <p className="text-xs text-foreground/45 mt-0.5">Helista kohe</p>
-                  </div>
+                <div className="flex items-center gap-3">
+                  <PhoneIcon />
+                  <span className="uppercase tracking-widest text-xs font-bold">
+                    Helista kohe — Kristjan võtab vastu
+                  </span>
                 </div>
-                <span className="text-foreground/30 group-hover:text-brand transition-colors">
-                  <ArrowIcon />
-                </span>
+                <ArrowIcon />
               </a>
+            )}
+            {/* Phone number as secondary row */}
+            {contactPhone && (
+              <div className="px-8 pb-1 pt-2 border-b border-divider">
+                <a href={`tel:${contactPhone}`} className="text-sm font-semibold text-foreground/60 hover:text-brand transition-colors">
+                  {contactPhone}
+                </a>
+              </div>
             )}
 
             {/* Info rows */}

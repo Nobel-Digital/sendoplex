@@ -118,6 +118,23 @@ function renderNode(node: RichTextNode, key: React.Key, ctx: { inTableCell?: boo
   return null;
 }
 
+// ── Default content (shown when CMS fields are empty) ─────────────────────────
+
+const DEFAULT_BODY = [
+  "Sendoplex on perefirma — ostame ja müüme autosid Eestis ja Soomes alates 2017. aastast. Meie eesmärk on lihtne: pakume Sinu autole ausat hinda, ütleme selgelt välja, kuidas selle hinnani jõudsime, ja vormistame paberid samal päeval.",
+  "Ei mingit lõputut tagasilükku ega kahtlast „garantiitasu". Vaatame auto üle, paneme hinna paika ja kui tagasi saame, raha on Sinu kontol enne, kui tagasi koju jõuad.",
+];
+
+const DEFAULT_STATS = [
+  { number: "9 a",   label: "Kogemust autoturul Eestis ja Soomes" },
+  { number: "2 800+", label: "Autot ostetud ja edasi müüdud" },
+  { number: "4.8",   label: "Keskmine hinnang Google'is (412 arvustust)" },
+];
+
+// Placeholder photo — replaced once c_aboutPhoto is set in Yext
+const FALLBACK_PHOTO =
+  "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=900&q=80&auto=format&fit=crop";
+
 // ── Types ─────────────────────────────────────────────────────────────────────
 
 export interface AboutStat {
@@ -146,7 +163,10 @@ const About: React.FC<AboutProps> = ({
   c_aboutFounderLabel,
 }) => {
   const nodes = c_aboutDescription?.json?.root?.children;
-  const hasStats = Array.isArray(c_aboutStats) && c_aboutStats.length > 0;
+  const hasRichText = Array.isArray(nodes) && nodes.length > 0;
+  const stats = Array.isArray(c_aboutStats) && c_aboutStats.length > 0 ? c_aboutStats : DEFAULT_STATS;
+  const photoUrl = c_aboutPhoto?.image?.url ?? FALLBACK_PHOTO;
+  const photoAlt = c_aboutPhoto?.altText ?? "Sendoplexi tiim";
 
   return (
     <section
@@ -155,28 +175,21 @@ const About: React.FC<AboutProps> = ({
     >
       <div className="container mx-auto max-w-screen-xl">
         <div className="flex flex-col md:flex-row gap-12 md:gap-16 items-start">
+
           {/* Left — photo */}
           <div className="w-full md:w-5/12 shrink-0">
-            {c_aboutPhoto?.image?.url ? (
-              <div className="relative rounded-2xl overflow-hidden">
-                <img
-                  src={c_aboutPhoto.image.url}
-                  alt={c_aboutPhoto.altText || "Meist"}
-                  className="w-full h-auto object-cover"
-                />
-                <div className="absolute bottom-4 left-4 inline-flex items-center gap-2 rounded-full bg-brand/85 backdrop-blur-sm px-4 py-2 text-xs font-medium text-white">
-                  <span className="w-2 h-2 rounded-full bg-primary shrink-0" aria-hidden="true" />
-                  Sendoplexi tiim · Tallinn
-                </div>
+            <div className="relative rounded-2xl overflow-hidden aspect-[4/5]">
+              <img
+                src={photoUrl}
+                alt={photoAlt}
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
+              <div className="absolute bottom-4 left-4 inline-flex items-center gap-2 rounded-full bg-brand/85 backdrop-blur-sm px-4 py-2 text-xs font-medium text-white">
+                <span className="w-2 h-2 rounded-full bg-primary shrink-0" aria-hidden="true" />
+                Sendoplexi tiim · Tallinn
               </div>
-            ) : (
-              <div className="relative rounded-2xl overflow-hidden bg-brand-soft aspect-[4/5]">
-                <div className="absolute bottom-4 left-4 inline-flex items-center gap-2 rounded-full bg-brand/85 px-4 py-2 text-xs font-medium text-white">
-                  <span className="w-2 h-2 rounded-full bg-primary shrink-0" aria-hidden="true" />
-                  Sendoplexi tiim · Tallinn
-                </div>
-              </div>
-            )}
+            </div>
           </div>
 
           {/* Right — copy */}
@@ -190,17 +203,24 @@ const About: React.FC<AboutProps> = ({
               </h2>
             )}
 
-            {Array.isArray(nodes) && nodes.length > 0 && (
+            {/* Body: CMS rich text OR default paragraphs */}
+            {hasRichText ? (
               <div className="text-foreground">
                 <Gallery>
                   <div className="leading-relaxed">
-                    {nodes.map((n, i) => renderNode(n, i))}
+                    {nodes!.map((n, i) => renderNode(n, i))}
                   </div>
                 </Gallery>
               </div>
+            ) : (
+              <div className="space-y-4">
+                {DEFAULT_BODY.map((para, i) => (
+                  <p key={i} className="text-foreground/70 leading-relaxed text-[15px]">{para}</p>
+                ))}
+              </div>
             )}
 
-            {/* Founders' signature */}
+            {/* Signature */}
             {(c_aboutSignature || c_aboutFounderLabel) && (
               <div className="mt-8 flex flex-col gap-1">
                 {c_aboutSignature && (
@@ -212,17 +232,26 @@ const About: React.FC<AboutProps> = ({
               </div>
             )}
 
-            {/* Stats */}
-            {hasStats && (
-              <div className="mt-10 pt-8 border-t border-divider grid grid-cols-3 gap-6">
-                {c_aboutStats!.map((stat, i) => (
+            {/* Stats row */}
+            <div className="mt-10 pt-8 border-t border-divider grid grid-cols-1 sm:grid-cols-3 gap-6">
+              {stats.map((stat, i) => {
+                // Split on em dash to get number vs label
+                const dashIdx = stat.label.indexOf(" — ");
+                const num   = dashIdx > -1 ? stat.number + " — " + stat.label.slice(0, dashIdx) : stat.number;
+                const label = dashIdx > -1 ? stat.label.slice(dashIdx + 3) : stat.label;
+                return (
                   <div key={i}>
-                    <p className="text-3xl font-bold text-foreground font-serif leading-none">{stat.number}</p>
+                    <p
+                      className="font-bold text-foreground leading-none"
+                      style={{ fontFamily: "'Instrument Serif', Georgia, serif", fontSize: "clamp(28px, 3vw, 40px)" }}
+                    >
+                      {stat.number}
+                    </p>
                     <p className="mt-2 text-xs text-foreground/50 leading-snug">{stat.label}</p>
                   </div>
-                ))}
-              </div>
-            )}
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>
