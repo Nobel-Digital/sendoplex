@@ -122,7 +122,8 @@ function renderNode(node: RichTextNode, key: React.Key, ctx: { inTableCell?: boo
 
 const DEFAULT_BODY = [
   "Sendoplex on perefirma — ostame ja müüme autosid Eestis ja Soomes alates 2017. aastast. Meie eesmärk on lihtne: pakume Sinu autole ausat hinda, ütleme selgelt välja, kuidas selle hinnani jõudsime, ja vormistame paberid samal päeval.",
-  "Ei mingit lõputut tagasilükku ega kahtlast „garantiitasu". Vaatame auto üle, paneme hinna paika ja kui tagasi saame, raha on Sinu kontol enne, kui tagasi koju jõuad.",
+  // eslint-disable-next-line quotes
+  `Ei mingit lõputut tagasilükku ega kahtlast „garantiitasu”. Vaatame auto üle, paneme hinna paika ja kui tagasi saame, raha on Sinu kontol enne, kui tagasi koju jõuad.`,
 ];
 
 const DEFAULT_STATS = [
