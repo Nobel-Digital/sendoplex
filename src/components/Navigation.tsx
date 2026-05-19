@@ -21,24 +21,6 @@ const LOCALE_LABELS: Record<string, string> = {
   et: "ET", en: "EN", fi: "FI", ru: "RU",
 };
 
-// Emoji-based flag — accurate on all modern platforms
-const FLAG_EMOJI: Record<string, string> = {
-  et: "🇪🇪", // 🇪🇪
-  en: "🇬🇧", // 🇬🇧
-  fi: "🇫🇮", // 🇫🇮
-  ru: "🇷🇺", // 🇷🇺
-};
-
-const Flag = ({ code }: { code: string }) => (
-  <span
-    style={{ fontFamily: "'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif", fontSize: 14, lineHeight: 1, flexShrink: 0 }}
-    role="img"
-    aria-label={`${code.toUpperCase()} flag`}
-  >
-    {FLAG_EMOJI[code] ?? code.toUpperCase()}
-  </span>
-);
-
 const ArrowIcon = () => (
   <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5 shrink-0" aria-hidden="true">
     <path d="M3 8h10m0 0L9 4m4 4l-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
@@ -132,12 +114,13 @@ const Navigation = ({ data }: NavigationProps) => {
               </Link>
             ))}
 
-            {/* Locale switcher — all locales visible */}
+            {/* Locale switcher — segmented pill */}
             {showSwitcher && (
-              <div className={`flex items-center gap-0.5 border-l ${divider} pl-6 ml-1`}>
-                {/* pill container */}
+              <div className={`flex items-center border-l ${divider} pl-6 ml-1`}>
                 <div
-                  className={`flex items-center gap-0.5 rounded-full px-1 py-1 transition-colors ${
+                  role="tablist"
+                  aria-label="Keel"
+                  className={`flex items-center rounded-full px-1 py-1 transition-colors ${
                     scrolled ? "bg-black/6 border border-black/8" : "bg-white/10 border border-white/18"
                   }`}
                 >
@@ -145,6 +128,8 @@ const Navigation = ({ data }: NavigationProps) => {
                     <a
                       key={code}
                       href={href}
+                      role="tab"
+                      aria-selected={active}
                       aria-label={`Switch language to ${label}`}
                       className={`flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-semibold transition-all ${
                         active
@@ -154,7 +139,7 @@ const Navigation = ({ data }: NavigationProps) => {
                           : `${navSubText} ${navHover}`
                       }`}
                     >
-                      <Flag code={short} />
+                      <span className={`flag flag-${short}`} aria-hidden="true" />
                       {label}
                     </a>
                   ))}
@@ -272,16 +257,22 @@ const Navigation = ({ data }: NavigationProps) => {
             )}
 
             {showSwitcher && (
-              <div className="flex items-center gap-2 mt-2 flex-wrap">
+              <div
+                role="tablist"
+                aria-label="Keel"
+                className="flex items-center gap-1 mt-2 rounded-full bg-white/10 border border-white/18 px-1 py-1 w-fit"
+              >
                 {allLocaleLinks.map(({ code, short, label, href, active }) => (
                   <a
                     key={code}
                     href={href}
-                    className={`flex items-center gap-1.5 text-sm font-semibold transition-colors px-2 py-1 rounded-md ${
-                      active ? "text-white bg-white/15" : "text-white/45 hover:text-white"
+                    role="tab"
+                    aria-selected={active}
+                    className={`flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-semibold transition-all ${
+                      active ? "bg-white/95 text-brand shadow-sm" : "text-white/55 hover:text-white"
                     }`}
                   >
-                    <Flag code={short} />
+                    <span className={`flag flag-${short}`} aria-hidden="true" />
                     {label}
                   </a>
                 ))}

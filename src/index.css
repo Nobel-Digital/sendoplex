@@ -9,3 +9,57 @@ html {
 body {
   @apply bg-background text-foreground font-mulish;
 }
+
+/* ── CSS flag chips ──────────────────────────────────────────────────────────
+   Used by the language switcher in Navigation. CSS-drawn so they render
+   identically on every OS (no emoji font variance).
+   Size: 14 × 10 px, 1.5 px border-radius.
+   ────────────────────────────────────────────────────────────────────────── */
+.flag {
+  display: inline-block;
+  width: 14px;
+  height: 10px;
+  border-radius: 1.5px;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.13);
+  overflow: hidden;
+  vertical-align: middle;
+}
+
+/* Estonia — blue | black | white */
+.flag-et {
+  background: linear-gradient(to bottom,
+    #0072ce 33.33%,
+    #000000 33.33% 66.67%,
+    #ffffff 66.67%
+  );
+}
+
+/* United Kingdom — blue field, white + red cross */
+.flag-en {
+  background:
+    linear-gradient(#c8102e 0 0) center / 100% 36%,
+    linear-gradient(#c8102e 0 0) center / 36% 100%,
+    linear-gradient(#ffffff 0 0) center / 100% 58%,
+    linear-gradient(#ffffff 0 0) center / 58% 100%,
+    #012169;
+  background-repeat: no-repeat;
+}
+
+/* Finland — white field, blue Nordic cross */
+.flag-fi {
+  background:
+    linear-gradient(#003580 0 0) center / 100% 32%,
+    linear-gradient(#003580 0 0) 30% center / 32% 100%,
+    #ffffff;
+  background-repeat: no-repeat;
+}
+
+/* Russia — white | blue | red */
+.flag-ru {
+  background: linear-gradient(to bottom,
+    #ffffff 33.33%,
+    #0039a6 33.33% 66.67%,
+    #d52b1e 66.67%
+  );
+}

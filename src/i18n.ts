@@ -8,27 +8,27 @@ export const t = (locale: string) => ({
 
   // ── Navigation ─────────────────────────────────────────────────────────────
   navItems: isFi(locale) ? [
-    { name: "Meistä", href: "#meist" },
-    { name: "Myy autosi", href: "#form" },
     { name: "Varaosat", href: "#varuosad" },
+    { name: "Myy autosi", href: "#form" },
+    { name: "Meistä", href: "#meist" },
     { name: "Blogi", href: "#blogi" },
     { name: "Yhteystiedot", href: "#kontakt" },
   ] : isRu(locale) ? [
-    { name: "О нас", href: "#meist" },
-    { name: "Продать авто", href: "#form" },
     { name: "Запчасти", href: "#varuosad" },
+    { name: "Продать авто", href: "#form" },
+    { name: "О нас", href: "#meist" },
     { name: "Блог", href: "#blogi" },
     { name: "Контакт", href: "#kontakt" },
   ] : isEn(locale) ? [
-    { name: "About", href: "#meist" },
-    { name: "Sell Your Car", href: "#form" },
     { name: "Parts", href: "#varuosad" },
+    { name: "Sell Your Car", href: "#form" },
+    { name: "About", href: "#meist" },
     { name: "Blog", href: "#blogi" },
     { name: "Contact", href: "#kontakt" },
   ] : [
-    { name: "Meist", href: "#meist" },
-    { name: "Müü auto", href: "#form" },
     { name: "Varuosad", href: "#varuosad" },
+    { name: "Müü auto", href: "#form" },
+    { name: "Meist", href: "#meist" },
     { name: "Blogi", href: "#blogi" },
     { name: "Kontakt", href: "#kontakt" },
   ],
