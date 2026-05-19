@@ -18,6 +18,58 @@ export interface PartsProps {
   locale?: string;
 }
 
+type LocaleString = { et: string; en: string; fi: string; ru: string };
+
+interface DefaultPlatform {
+  name: string;
+  iconLabel: string;
+  description: LocaleString;
+  url: string;
+  tags: LocaleString[];
+}
+
+const DEFAULT_PLATFORMS: DefaultPlatform[] = [
+  {
+    name: "eBay",
+    iconLabel: "eB",
+    description: {
+      et: "Lai valik kasutatud ja uusi varuosi rahvusvahelistelt müüjatelt.",
+      en: "Wide selection of used and new parts from international sellers.",
+      fi: "Laaja valikoima käytettyjä ja uusia osia kansainvälisiltä myyjiltä.",
+      ru: "Широкий выбор б/у и новых запчастей от международных продавцов.",
+    },
+    url: "https://www.ebay.com/motors",
+    tags: [
+      { et: "Originaal & järelturg", en: "OEM & aftermarket", fi: "Alkuperäinen & jälkimarkkinat", ru: "Оригинал и аналоги" },
+      { et: "Rahvusvaheline", en: "International", fi: "Kansainvälinen", ru: "Международный" },
+      { et: "Haruldased osad", en: "Rare parts", fi: "Harvinaiset osat", ru: "Редкие детали" },
+    ],
+  },
+  {
+    name: "Autodoc.ee",
+    iconLabel: "AD",
+    description: {
+      et: "Eestikeelne tugi, kiire kohaletoimetamine ja lai mudelivalik.",
+      en: "Estonian-language support, fast delivery and wide model coverage.",
+      fi: "Vironkielinen tuki, nopea toimitus ja laaja mallivalikoima.",
+      ru: "Поддержка на эстонском, быстрая доставка и широкий выбор моделей.",
+    },
+    url: "https://www.autodoc.ee",
+    tags: [
+      { et: "Eestikeelne", en: "Estonian UI", fi: "Vironkielinen", ru: "На эстонском" },
+      { et: "1-3 päeva", en: "1-3 days", fi: "1-3 päivää", ru: "1-3 дня" },
+      { et: "Originaal & OEM", en: "Original & OEM", fi: "Alkuperäinen & OEM", ru: "Оригинал & OEM" },
+    ],
+  },
+];
+
+function getLocale(obj: LocaleString, locale: string): string {
+  if (locale.startsWith("en")) return obj.en;
+  if (locale.startsWith("fi")) return obj.fi;
+  if (locale.startsWith("ru")) return obj.ru;
+  return obj.et;
+}
+
 const ArrowIcon = () => (
   <svg viewBox="0 0 16 16" fill="none" className="w-4 h-4 shrink-0" aria-hidden="true">
     <path d="M3 8h10m0 0L9 4m4 4l-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
@@ -38,71 +90,6 @@ const SearchIcon = () => (
   </svg>
 );
 
-const PART_CATEGORIES = [
-  {
-    name: { et: "Mootor", en: "Engine", fi: "Moottori", ru: "Двигатель" },
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" aria-hidden="true">
-        <path d="M4 11h2V9h3V7h6v2h3v2h2v4h-2v2h-3v2H9v-2H6v-2H4v-4z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
-        <path d="M11 11h2v2h-2z" fill="currentColor" />
-      </svg>
-    ),
-  },
-  {
-    name: { et: "Pidurid", en: "Brakes", fi: "Jarrut", ru: "Тормоза" },
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" aria-hidden="true">
-        <circle cx="12" cy="12" r="8" stroke="currentColor" strokeWidth="1.5" />
-        <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="1.5" />
-        <path d="M12 4v3M12 17v3M4 12h3M17 12h3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-      </svg>
-    ),
-  },
-  {
-    name: { et: "Vedrustus", en: "Suspension", fi: "Jousitus", ru: "Подвеска" },
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" aria-hidden="true">
-        <path d="M12 3v18M9 6l3-3 3 3M9 18l3 3 3-3M12 7c-2 1-2 3 0 4s2 3 0 4 0 3 0 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
-  },
-  {
-    name: { et: "Elektrisüsteem", en: "Electrics", fi: "Sähköjärjestelmä", ru: "Электрика" },
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" aria-hidden="true">
-        <path d="M13 3L5 14h5l-1 7 8-11h-5l1-7z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
-      </svg>
-    ),
-  },
-  {
-    name: { et: "Kere ja tuled", en: "Body & Lights", fi: "Kori ja valot", ru: "Кузов и фары" },
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" aria-hidden="true">
-        <path d="M3 14h18M5 14l2-6c.4-1.2 1.5-2 2.8-2h4.4c1.3 0 2.4.8 2.8 2l2 6M7 14v3M17 14v3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-        <circle cx="8" cy="14" r="1.5" fill="currentColor" />
-        <circle cx="16" cy="14" r="1.5" fill="currentColor" />
-      </svg>
-    ),
-  },
-  {
-    name: { et: "Rehvid ja veljed", en: "Tyres & Rims", fi: "Renkaat ja vanteet", ru: "Шины и диски" },
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" aria-hidden="true">
-        <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.5" />
-        <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="1.5" />
-        <path d="M12 3v6M12 15v6M3 12h6M15 12h6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-      </svg>
-    ),
-  },
-];
-
-function getCatName(cat: typeof PART_CATEGORIES[0], locale: string): string {
-  if (locale.startsWith("en")) return cat.name.en;
-  if (locale.startsWith("fi")) return cat.name.fi;
-  if (locale.startsWith("ru")) return cat.name.ru;
-  return cat.name.et;
-}
-
 const Parts: React.FC<PartsProps> = ({
   c_partsSectionTitle,
   c_partsSectionDescription,
@@ -112,16 +99,19 @@ const Parts: React.FC<PartsProps> = ({
   locale = "et",
 }) => {
   const tr = t(locale);
-  const platforms = c_partnerPlatforms ?? [];
+
+  // Use CMS platforms if provided, otherwise fall back to defaults
+  const hasCmsPlatforms = Array.isArray(c_partnerPlatforms) && c_partnerPlatforms.length > 0;
 
   return (
     <section className="bg-brand text-white" id="varuosad">
       <div className="container mx-auto max-w-screen-xl px-6 py-20">
+
         {/* Section header */}
         <div className="flex flex-col md:flex-row md:items-start md:gap-16 mb-12">
           <div className="flex-1">
             <span className="inline-block text-xs font-semibold tracking-widest uppercase text-primary mb-4 opacity-80">
-              Varuosad · Soovitame
+              {tr.partsRecommended}
             </span>
             {c_partsSectionTitle && (
               <h2 className="text-section-title font-bold text-white leading-tight">
@@ -136,33 +126,17 @@ const Parts: React.FC<PartsProps> = ({
           )}
         </div>
 
-        {/* Part categories */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mb-14">
-          {PART_CATEGORIES.map((cat, i) => (
-            <a
-              key={i}
-              href="#parts-help"
-              className="flex flex-col items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-4 py-5 text-center transition-all hover:border-primary/50 hover:bg-white/10"
-            >
-              <div className="text-white/80">{cat.icon}</div>
-              <span className="text-xs font-medium text-white/75 leading-snug">
-                {getCatName(cat, locale)}
-              </span>
-            </a>
-          ))}
+        {/* Partner platforms */}
+        <div className="flex items-center justify-between mb-4">
+          <span className="text-xs font-semibold tracking-widest uppercase text-white/40">
+            {tr.partsRecommended}
+          </span>
+          <span className="text-xs text-white/30 hidden sm:block">{tr.partsNoSponsors}</span>
         </div>
 
-        {/* Partner platforms */}
-        {platforms.length > 0 && (
-          <>
-            <div className="flex items-center justify-between mb-4">
-              <span className="text-xs font-semibold tracking-widest uppercase text-white/40">
-                {tr.partsRecommended}
-              </span>
-              <span className="text-xs text-white/30 hidden sm:block">{tr.partsNoSponsors}</span>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-14">
-              {platforms.map((p, i) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-14">
+          {hasCmsPlatforms
+            ? c_partnerPlatforms!.map((p, i) => (
                 <a
                   key={i}
                   href={p.url ?? "#"}
@@ -172,22 +146,22 @@ const Parts: React.FC<PartsProps> = ({
                 >
                   <div className="flex items-start justify-between gap-4 mb-4">
                     <div className="flex items-center gap-4">
-                      <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-white/10 text-sm font-bold text-white shrink-0">
+                      <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-white text-sm font-bold text-foreground shrink-0">
                         {p.iconLabel}
                       </div>
                       <div>
                         <p className="font-semibold text-white">{p.name}</p>
                         {p.description && (
-                          <p className="text-xs text-white/55 mt-0.5 leading-snug">{p.description}</p>
+                          <p className="text-xs text-white/55 mt-0.5 leading-snug max-w-xs">{p.description}</p>
                         )}
                       </div>
                     </div>
-                    <div className="text-white/40 group-hover:text-primary transition-colors shrink-0 mt-0.5">
+                    <div className="text-white/40 group-hover:text-primary transition-colors shrink-0 mt-1">
                       <ArrowIcon />
                     </div>
                   </div>
                   {Array.isArray(p.tags) && p.tags.length > 0 && (
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-2 mt-2">
                       {p.tags.map((tag, j) => (
                         <span
                           key={j}
@@ -199,15 +173,49 @@ const Parts: React.FC<PartsProps> = ({
                     </div>
                   )}
                 </a>
+              ))
+            : DEFAULT_PLATFORMS.map((p, i) => (
+                <a
+                  key={i}
+                  href={p.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex flex-col rounded-xl border border-white/10 bg-white/5 p-6 transition-all hover:border-white/25 hover:bg-white/10"
+                >
+                  <div className="flex items-start justify-between gap-4 mb-4">
+                    <div className="flex items-center gap-4">
+                      <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-white text-sm font-bold text-foreground shrink-0">
+                        {p.iconLabel}
+                      </div>
+                      <div>
+                        <p className="font-semibold text-white text-base">{p.name}</p>
+                        <p className="text-xs text-white/55 mt-0.5 leading-snug max-w-xs">
+                          {getLocale(p.description, locale)}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="text-white/40 group-hover:text-primary transition-colors shrink-0 mt-1">
+                      <ArrowIcon />
+                    </div>
+                  </div>
+                  <div className="flex flex-wrap gap-2 mt-2">
+                    {p.tags.map((tag, j) => (
+                      <span
+                        key={j}
+                        className="rounded-full bg-white/8 px-3 py-1 text-[11px] font-medium text-white/55 border border-white/10"
+                      >
+                        {getLocale(tag, locale)}
+                      </span>
+                    ))}
+                  </div>
+                </a>
               ))}
-            </div>
-          </>
-        )}
+        </div>
 
         {/* Not found CTA */}
         <div
           id="parts-help"
-          className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 rounded-2xl border border-white/12 bg-white/5 p-8"
+          className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 rounded-2xl border border-primary/30 bg-white/5 p-8"
         >
           <div className="flex items-start gap-5">
             <div className="shrink-0 text-primary mt-0.5">
@@ -222,7 +230,7 @@ const Parts: React.FC<PartsProps> = ({
             {mainPhone && (
               <a
                 href={`tel:${mainPhone}`}
-                className="inline-flex items-center gap-2 rounded-md bg-primary text-brand px-5 py-2.5 text-sm font-bold transition-all hover:bg-primary-hover"
+                className="inline-flex items-center gap-2 rounded-full bg-primary text-brand px-5 py-2.5 text-sm font-bold transition-all hover:bg-primary-hover"
               >
                 <PhoneIcon />
                 {mainPhone}
@@ -231,7 +239,7 @@ const Parts: React.FC<PartsProps> = ({
             {c_partsContactEmail && (
               <a
                 href={`mailto:${c_partsContactEmail}`}
-                className="inline-flex items-center gap-2 rounded-md border border-white/30 text-white px-5 py-2.5 text-sm font-semibold transition-all hover:border-white/60 hover:bg-white/10"
+                className="inline-flex items-center gap-2 rounded-full border border-white/30 text-white px-5 py-2.5 text-sm font-semibold transition-all hover:border-white/60 hover:bg-white/10"
               >
                 {tr.partsWriteUs}
                 <ArrowIcon />
@@ -239,6 +247,7 @@ const Parts: React.FC<PartsProps> = ({
             )}
           </div>
         </div>
+
       </div>
     </section>
   );
