@@ -118,6 +118,39 @@ function renderNode(node: RichTextNode, key: React.Key, ctx: { inTableCell?: boo
   return null;
 }
 
+// ── Helpers ───────────────────────────────────────────────────────────────────
+
+const SERIF_STYLE: React.CSSProperties = {
+  fontFamily: "'Instrument Serif', Georgia, serif",
+  fontStyle: "italic",
+};
+
+/**
+ * Renders a stat number string with Instrument Serif applied to the numeric
+ * part and plain bold to any letter suffix:
+ *   "9 a"   → <em>9</em> a   (number serif, unit plain)
+ *   "4.8"   → <em>4.8</em>   (pure decimal: all serif)
+ *   "2 800+" → 2 800+        (has "+": all plain bold)
+ */
+function renderStatNumber(num: string): React.ReactNode {
+  // Has letter suffix (e.g. "9 a") — split and apply serif to numeric part only
+  const withSuffix = num.match(/^([\d.,\s]+)([a-zA-Z].*)$/);
+  if (withSuffix) {
+    return (
+      <>
+        <em style={SERIF_STYLE}>{withSuffix[1].trimEnd()}</em>
+        {" " + withSuffix[2]}
+      </>
+    );
+  }
+  // Pure decimal or integer (e.g. "4.8", "412") — all serif
+  if (/^[\d.,\s]+$/.test(num)) {
+    return <em style={SERIF_STYLE}>{num}</em>;
+  }
+  // Contains "+" or other non-letter suffixes (e.g. "2 800+") — plain bold
+  return <>{num}</>;
+}
+
 // ── Default content (shown when CMS fields are empty) ─────────────────────────
 
 const DEFAULT_BODY = [
@@ -245,9 +278,9 @@ const About: React.FC<AboutProps> = ({
                   <div key={i}>
                     <p
                       className="font-bold text-foreground leading-none"
-                      style={{ fontFamily: "'Instrument Serif', Georgia, serif", fontSize: "clamp(28px, 3vw, 40px)" }}
+                      style={{ fontSize: "clamp(28px, 3vw, 40px)" }}
                     >
-                      {stat.number}
+                      {renderStatNumber(stat.number)}
                     </p>
                     <p className="mt-2 text-xs text-foreground/50 leading-snug">{stat.label}</p>
                   </div>

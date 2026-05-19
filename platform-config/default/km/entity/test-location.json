@@ -86,7 +86,7 @@
       "link": "#form"
     },
     "c_heroSlogan": "Auto kokkuost & varuosad · Eestis ja Soomes",
-    "c_heroDescription": "Müü oma auto. Või leia varuosa.",
+    "c_heroDescription": "Müü oma auto.|Või leia _varuosa_.",
     "c_heroButton": {
       "label": "Paku oma autot",
       "link": "#form"
@@ -98,7 +98,7 @@
     "c_heroStatKicker": "Iga kuu ostame",
     "c_heroStatNumber": "~120",
     "c_heroStatLabel": "autot Eestis ja Soomes",
-    "c_partsSectionTitle": "Otsid varuosi? Aitame leida.",
+    "c_partsSectionTitle": "Otsid _varuosi?_|Aitame leida.",
     "c_partsSectionDescription": "Pikkade aastate jooksul oleme leidnud kaks platvormi, mida tasub Eestis kõige rohkem usaldada. Allpool ka populaarsemad kategooriad — ja kui osa ei leia, võta meiega ühendust.",
     "c_partsContactEmail": "varuosad@sendoplex.ee",
     "c_carFormTitle": "Saada andmed, saa aus pakkumine.",

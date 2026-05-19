@@ -50,7 +50,9 @@
     "c_basicFormDescription",
     "c_faqTitle",
     "c_trustItemLabels",
-    "c_trustItemValues"
+    "c_trustItemValues",
+    "c_termsContent",
+    "c_cookiesContent"
   ],
   "required": []
 }

@@ -40,7 +40,7 @@ function parseHeadline(text: string): React.ReactNode {
           <em
             key={i}
             style={{ fontFamily: "'Instrument Serif', Georgia, serif" }}
-            className="not-italic italic text-white/92"
+            className="italic text-white/92"
           >
             {part.slice(1, -1)}
           </em>

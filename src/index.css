@@ -10,6 +10,13 @@ body {
   @apply bg-background text-foreground font-mulish;
 }
 
+/* ── reCAPTCHA badge ─────────────────────────────────────────────────────────
+   Hide the floating badge; attribution is present in the form consent text.
+   ────────────────────────────────────────────────────────────────────────── */
+.grecaptcha-badge {
+  visibility: hidden !important;
+}
+
 /* ── CSS flag chips ──────────────────────────────────────────────────────────
    Used by the language switcher in Navigation. CSS-drawn so they render
    identically on every OS (no emoji font variance).

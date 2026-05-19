@@ -70,21 +70,26 @@ function getLocale(obj: LocaleString, locale: string): string {
   return obj.et;
 }
 
-/** Parses _word_ → Instrument Serif italic (same convention as Banner headline) */
+/** Parses _word_ italic and | line-break — same conventions as Banner parseHeadline */
 function parseItalic(text: string): React.ReactNode {
-  return text.split(/(_[^_]+_)/g).map((part, i) =>
-    part.startsWith("_") && part.endsWith("_") ? (
-      <em
-        key={i}
-        style={{ fontFamily: "'Instrument Serif', Georgia, serif" }}
-        className="not-italic italic text-white"
-      >
-        {part.slice(1, -1)}
-      </em>
-    ) : (
-      <span key={i}>{part}</span>
-    )
-  );
+  return text.split("|").map((line, lineIdx, lines) => (
+    <React.Fragment key={lineIdx}>
+      {line.split(/(_[^_]+_)/g).map((part, i) =>
+        part.startsWith("_") && part.endsWith("_") ? (
+          <em
+            key={i}
+            style={{ fontFamily: "'Instrument Serif', Georgia, serif" }}
+            className="italic text-white"
+          >
+            {part.slice(1, -1)}
+          </em>
+        ) : (
+          <span key={i}>{part}</span>
+        )
+      )}
+      {lineIdx < lines.length - 1 && <br />}
+    </React.Fragment>
+  ));
 }
 
 const ArrowIcon = () => (

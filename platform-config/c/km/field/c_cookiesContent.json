@@ -1,0 +1,11 @@
+{
+  "$id": "c_cookiesContent",
+  "$schema": "https://schema.yext.com/config/km/field/v1",
+  "displayName": "Cookie Policy Content",
+  "group": "NONE",
+  "localization": "LOCALE_SPECIFIC",
+  "type": {
+    "richTextV2Type": {}
+  },
+  "typeId": "richTextV2"
+}

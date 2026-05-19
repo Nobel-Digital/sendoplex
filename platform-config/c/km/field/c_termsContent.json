@@ -1,0 +1,11 @@
+{
+  "$id": "c_termsContent",
+  "$schema": "https://schema.yext.com/config/km/field/v1",
+  "displayName": "Terms & Conditions Content",
+  "group": "NONE",
+  "localization": "LOCALE_SPECIFIC",
+  "type": {
+    "richTextV2Type": {}
+  },
+  "typeId": "richTextV2"
+}

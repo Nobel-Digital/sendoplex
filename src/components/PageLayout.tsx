@@ -40,6 +40,8 @@ const PageLayout = ({ children, data, templateData }: PageLayoutProps) => {
             c_availableLocales={data.c_availableLocales}
             facebookPageUrl={data.facebookPageUrl}
             instagramHandle={data.instagramHandle}
+            c_termsContent={data.c_termsContent}
+            c_cookiesContent={data.c_cookiesContent}
           />
         </AnalyticsScopeProvider>
         <ChatWidget

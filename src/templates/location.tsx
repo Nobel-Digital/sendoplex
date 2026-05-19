@@ -55,6 +55,8 @@ export const config: TemplateConfig = {
       "c_vatNumber",
       "c_availableLocales",
       "c_privacyPolicy",
+      "c_termsContent",
+      "c_cookiesContent",
       // ── Navigation ────────────────────────────────────────────────────────
       "c_navigationButton",
       // ── Hero / Banner ─────────────────────────────────────────────────────
@@ -232,6 +234,8 @@ const Location: Template<TemplateRenderProps> = ({ __meta, document }) => {
     // Nav / layout
     c_navigationButton,
     c_privacyPolicy,
+    c_termsContent,
+    c_cookiesContent,
     c_availableLocales,
   } = document;
 
@@ -264,6 +268,8 @@ const Location: Template<TemplateRenderProps> = ({ __meta, document }) => {
     c_basicFormTitle,
     c_basicFormDescription,
     c_privacyPolicy,
+    c_termsContent,
+    c_cookiesContent,
     facebookPageUrl,
     instagramHandle,
     c_faqTitle,

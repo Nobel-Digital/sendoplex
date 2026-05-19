@@ -8,6 +8,8 @@ export interface FooterProps {
   _site?: any;
   logo?: string;
   c_privacyPolicy: any;
+  c_termsContent?: any;
+  c_cookiesContent?: any;
   locale?: string;
   name?: string;
   mainPhone?: string;
@@ -38,6 +40,8 @@ const ArrowIcon = () => (
 
 const Footer = ({
   c_privacyPolicy,
+  c_termsContent,
+  c_cookiesContent,
   locale = "et",
   name,
   mainPhone,
@@ -50,7 +54,9 @@ const Footer = ({
   instagramHandle,
 }: FooterProps) => {
   const tr = t(locale);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen,    setIsModalOpen]    = useState(false);
+  const [isTermsOpen,    setIsTermsOpen]    = useState(false);
+  const [isCookiesOpen,  setIsCookiesOpen]  = useState(false);
 
   const currentCode = locale.split("-")[0].toLowerCase();
   const availableLocales = c_availableLocales ?? [];
@@ -202,8 +208,24 @@ const Footer = ({
             >
               {tr.footerPrivacy}
             </button>
-            <span>{tr.footerTerms}</span>
-            <span>{tr.footerCookies}</span>
+            {c_termsContent && (
+              <button
+                type="button"
+                onClick={() => setIsTermsOpen(true)}
+                className="hover:text-white transition-colors cursor-pointer"
+              >
+                {tr.footerTerms}
+              </button>
+            )}
+            {c_cookiesContent && (
+              <button
+                type="button"
+                onClick={() => setIsCookiesOpen(true)}
+                className="hover:text-white transition-colors cursor-pointer"
+              >
+                {tr.footerCookies}
+              </button>
+            )}
           </div>
         </div>
       </div>
@@ -215,7 +237,8 @@ const Footer = ({
         c_privacyPolicy={c_privacyPolicy}
         locale={locale}
       />
-      <Modal show={isModalOpen} onClose={() => setIsModalOpen(false)} c_privacyPolicy={c_privacyPolicy} locale={locale} />
+      <Modal show={isTermsOpen}   onClose={() => setIsTermsOpen(false)}   c_privacyPolicy={c_termsContent}   locale={locale} />
+      <Modal show={isCookiesOpen} onClose={() => setIsCookiesOpen(false)} c_privacyPolicy={c_cookiesContent} locale={locale} />
     </footer>
   );
 };
