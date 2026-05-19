@@ -119,7 +119,7 @@ const Banner: React.FC<BannerProps> = ({
             {c_heroSlogan && (
               <div className="flex items-center gap-2 mb-5">
                 <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" aria-hidden="true" />
-                <span className="text-[11px] font-semibold tracking-[0.14em] uppercase text-white/68">
+                <span className="text-[11px] font-semibold tracking-[0.14em] uppercase text-white/42">
                   {c_heroSlogan}
                 </span>
               </div>
@@ -210,10 +210,10 @@ const Banner: React.FC<BannerProps> = ({
                 : ""
             }`}
           >
-            <p className="text-[10px] font-semibold tracking-[0.13em] uppercase text-white/36 mb-1.5">
+            <p className="text-[10px] font-semibold tracking-[0.13em] uppercase text-white/28 mb-1.5">
               {String(i + 1).padStart(2, "0")} — {item.label}
             </p>
-            <p className="font-semibold text-white/85" style={{ fontSize: "20px" }}>{item.value}</p>
+            <p className="font-semibold text-white/60" style={{ fontSize: "20px" }}>{item.value}</p>
           </div>
         ))}
       </div>

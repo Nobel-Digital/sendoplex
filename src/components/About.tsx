@@ -133,8 +133,9 @@ const DEFAULT_STATS = [
 ];
 
 // Placeholder photo — replaced once c_aboutPhoto is set in Yext
+// Car showroom interior — professional and anonymous, no faces
 const FALLBACK_PHOTO =
-  "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=900&q=80&auto=format&fit=crop";
+  "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=900&q=80&auto=format&fit=crop";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 

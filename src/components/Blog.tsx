@@ -22,40 +22,16 @@ const DEFAULT_SECTION_TITLE = "Auto müügist arusaadavalt.";
 const DEFAULT_SECTION_DESC  =
   "Vahel on kõige kasulikum see, mida müüja Sulle ei räägi. Kogume kokku küsimused, mida kliendid meile kõige sagedamini esitavad — ja vastame ausalt.";
 
-const DEFAULT_ARTICLES: BlogArticle[] = [
-  {
-    name: "Kuidas valmistada auto müügiks ette: 7 nõuannet",
-    c_blogCategory: "Müügiõpetus",
-    c_blogDate: "Aprill 2026",
-    c_blogReadMinutes: 5,
-    c_blogExcerpt:
-      "Väike ettevalmistus enne müüki võib lisada autole sadu eurosid. Siin on seitse asja, mida iga müüja peaks teadma.",
-  },
-  {
-    name: "Mis on minu auto tegelik turuhind aastal 2026?",
-    c_blogCategory: "Hindamine",
-    c_blogDate: "Märts 2026",
-    c_blogReadMinutes: 4,
-    c_blogExcerpt:
-      "Autoturul on hinnad muutunud. Vaatame, millest kujuneb sinu auto tegelik väärtus täna ja miks autokauplejate pakkumised tihtipeale erinevad.",
-  },
-  {
-    name: "Eraisik vs. firma: kellele on auto kasulikum müüa?",
-    c_blogCategory: "Nõuanded",
-    c_blogDate: "Veebruar 2026",
-    c_blogReadMinutes: 6,
-    c_blogExcerpt:
-      "KM-kohustus, käibemaks ja läbirääkimisjõud — selgitame, milline müügivariant jätab rohkem raha taskusse.",
-  },
-  {
-    name: "Vana auto käivitusprobleemid talvel: 5 levinumat põhjust",
-    c_blogCategory: "Tehnika",
-    c_blogDate: "Jaanuar 2026",
-    c_blogReadMinutes: 3,
-    c_blogExcerpt:
-      "Külmadel hommikutel keeldub auto käivitumast? Siit leiad kõige sagedasemad põhjused ja mida enne remonditöökotta sõitmist ise kontrollida.",
-  },
-];
+import { BLOG_ARTICLES } from "../data/blogArticles";
+
+const DEFAULT_ARTICLES: BlogArticle[] = BLOG_ARTICLES.map(a => ({
+  name:               a.title,
+  c_blogCategory:     a.category,
+  c_blogDate:         a.date,
+  c_blogReadMinutes:  a.readMinutes,
+  c_blogExcerpt:      a.excerpt,
+  slug:               a.path,   // full path so href="/{path}" works correctly
+}));
 
 const THUMB_COLORS = ["bg-brand", "bg-brand-soft", "bg-brand-tint", "bg-primary/20"];
 
@@ -168,7 +144,7 @@ const Blog: React.FC<BlogProps> = ({
         {/* All articles CTA */}
         <div className="mt-10 flex justify-center">
           <a
-            href="#"
+            href="/blogi"
             className="inline-flex items-center gap-2 rounded-full border border-foreground/20 text-foreground px-6 py-3 text-sm font-semibold transition-all hover:border-foreground/50 hover:bg-foreground/5"
           >
             {tr.blogAllArticles}

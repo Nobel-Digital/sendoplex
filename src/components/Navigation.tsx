@@ -21,28 +21,23 @@ const LOCALE_LABELS: Record<string, string> = {
   et: "ET", en: "EN", fi: "FI", ru: "RU",
 };
 
-// CSS-rendered flag component matching design
-const Flag = ({ code }: { code: string }) => {
-  const styles: Record<string, React.CSSProperties> = {
-    et: { background: "linear-gradient(180deg,#4891d9 33.33%,#14181a 33.33% 66.66%,#fff 66.66%)" },
-    en: { background: "#012169" },
-    fi: { background: "#fff", position: "relative", overflow: "hidden" },
-    ru: { background: "linear-gradient(180deg,#fff 33.33%,#0039A6 33.33% 66.66%,#D52B1E 66.66%)" },
-  };
-  return (
-    <span
-      style={{
-        display: "inline-block",
-        width: 16,
-        height: 11,
-        borderRadius: 2,
-        flexShrink: 0,
-        ...styles[code],
-      }}
-      aria-hidden="true"
-    />
-  );
+// Emoji-based flag — accurate on all modern platforms
+const FLAG_EMOJI: Record<string, string> = {
+  et: "🇪🇪", // 🇪🇪
+  en: "🇬🇧", // 🇬🇧
+  fi: "🇫🇮", // 🇫🇮
+  ru: "🇷🇺", // 🇷🇺
 };
+
+const Flag = ({ code }: { code: string }) => (
+  <span
+    style={{ fontFamily: "'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif", fontSize: 14, lineHeight: 1, flexShrink: 0 }}
+    role="img"
+    aria-label={`${code.toUpperCase()} flag`}
+  >
+    {FLAG_EMOJI[code] ?? code.toUpperCase()}
+  </span>
+);
 
 const ArrowIcon = () => (
   <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5 shrink-0" aria-hidden="true">
