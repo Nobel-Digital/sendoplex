@@ -74,7 +74,7 @@ export interface SchemaProps {
  * - Optional FAQPage
  */
 const Schema = ({ data }: SchemaProps) => {
-  const name: string = data?.name || "RISTIPARTNER OÜ";
+  const name: string = data?.name || "Sendoplex OÜ";
   const url: string | undefined = data?.websiteUrl || data?.landingPageUrl || data?.c_websiteUrl;
 
   const address = data?.address || {};
