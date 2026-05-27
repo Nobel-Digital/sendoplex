@@ -37,12 +37,12 @@ const Navigation = ({ data }: NavigationProps) => {
   const ctaLabel = data.c_navigationButton?.label;
   const ctaLink  = data.c_navigationButton?.link;
 
-  const currentLocaleCode = locale.split("-")[0].toLowerCase();
+  const currentLocaleCode = locale.split(/[-_]/)[0].toLowerCase();
   const availableLocales: string[] = data.c_availableLocales ?? [];
 
   // All locales for switcher — current shown as active
   const allLocaleLinks = availableLocales.map((code) => {
-    const short = code.split("-")[0].toLowerCase();
+    const short = code.split(/[-_]/)[0].toLowerCase();
     return {
       code,
       short,

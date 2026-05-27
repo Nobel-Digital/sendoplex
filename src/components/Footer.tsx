@@ -58,7 +58,7 @@ const Footer = ({
   const [isTermsOpen,    setIsTermsOpen]    = useState(false);
   const [isCookiesOpen,  setIsCookiesOpen]  = useState(false);
 
-  const currentCode = locale.split("-")[0].toLowerCase();
+  const currentCode = locale.split(/[-_]/)[0].toLowerCase();
   const availableLocales = c_availableLocales ?? [];
 
   const navLinks = tr.navItems;
@@ -177,9 +177,9 @@ const Footer = ({
                 </li>
                 {/* Other locales */}
                 {availableLocales
-                  .filter((code) => code.split("-")[0].toLowerCase() !== currentCode)
+                  .filter((code) => code.split(/[-_]/)[0].toLowerCase() !== currentCode)
                   .map((code) => {
-                    const short = code.split("-")[0].toLowerCase();
+                    const short = code.split(/[-_]/)[0].toLowerCase();
                     const href = short === "et" ? "/" : `/${short}`;
                     return (
                       <li key={code}>

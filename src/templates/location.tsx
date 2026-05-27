@@ -120,7 +120,7 @@ export const getPath: GetPath<TemplateProps> = ({ document }) => {
   // fall back to a clean locale-based path that mirrors the language switcher
   // hrefs ("/", "/en", "/fi", "/ru") so switching locales never 404s.
   if (document.slug) return document.slug;
-  const locale = (document.meta?.locale ?? "et").split("-")[0].toLowerCase();
+  const locale = (document.meta?.locale ?? "et").split(/[-_]/)[0].toLowerCase();
   return locale === "et" ? "index" : locale;
 };
 
