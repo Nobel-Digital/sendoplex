@@ -4,7 +4,7 @@ const FALLBACK_IMAGE =
   "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=2400&q=80&auto=format&fit=crop";
 
 const DEFAULT_SUB_COPY =
-  "Ostame Sinu auto välja kiiresti ja ausa hinnaga — pakkumine ühe tunni jooksul, raha samal päeval. Ning kui otsid varuosa, aitame õige leida Eesti ja Soome lammutuste võrgustikust.";
+  "Kontrollitud kasutatud ja kvaliteetsed uued aftermarket-varuosad. Üle 20 aasta kogemust Mercedes-Benz sõidukite varuosade valdkonnas. Vajadusel aitame leida sobiva lahenduse ka teistele automarkidele.";
 
 const DEFAULT_TRUST: Array<{ label: string; value: string }> = [
   { label: "PAKKUMINE",      value: "1h jooksul" },
