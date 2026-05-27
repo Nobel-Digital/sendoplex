@@ -1,10 +1,8 @@
 import * as React from "react";
+import { t } from "../i18n";
 
 const FALLBACK_IMAGE =
   "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=2400&q=80&auto=format&fit=crop";
-
-const DEFAULT_SUB_COPY =
-  "Kontrollitud kasutatud ja kvaliteetsed uued aftermarket-varuosad. Üle 20 aasta kogemust Mercedes-Benz sõidukite varuosade valdkonnas. Vajadusel aitame leida sobiva lahenduse ka teistele automarkidele.";
 
 const DEFAULT_TRUST: Array<{ label: string; value: string }> = [
   { label: "PAKKUMINE",      value: "1h jooksul" },
@@ -25,6 +23,7 @@ export interface BannerProps {
   c_heroStatLabel?: string;
   c_trustItemLabels?: string[];
   c_trustItemValues?: string[];
+  locale?: string;
 }
 
 /**
@@ -71,7 +70,9 @@ const Banner: React.FC<BannerProps> = ({
   c_heroStatLabel,
   c_trustItemLabels,
   c_trustItemValues,
+  locale = "et",
 }) => {
+  const tr = t(locale);
   const imageUrl = c_heroImage?.image?.url ?? FALLBACK_IMAGE;
 
   const trustItems =
@@ -83,7 +84,7 @@ const Banner: React.FC<BannerProps> = ({
   const secLabel = c_heroSecondaryButton?.label ?? "Otsi varuosa";
   const secLink  = c_heroSecondaryButton?.link  ?? "#varuosad";
 
-  const subCopy = c_heroSubCopy ?? DEFAULT_SUB_COPY;
+  const subCopy = c_heroSubCopy ?? tr.heroSubCopy;
 
   return (
     <section

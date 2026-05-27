@@ -18,57 +18,29 @@ export interface PartsProps {
   locale?: string;
 }
 
-type LocaleString = { et: string; en: string; fi: string; ru: string };
-
 interface DefaultPlatform {
   name: string;
   iconLabel: string;
-  description: LocaleString;
   url: string;
-  tags: LocaleString[];
 }
 
 const DEFAULT_PLATFORMS: DefaultPlatform[] = [
   {
-    name: "eBay",
-    iconLabel: "eB",
-    description: {
-      et: "Lai valik kasutatud ja uusi varuosi rahvusvahelistelt müüjatelt.",
-      en: "Wide selection of used and new parts from international sellers.",
-      fi: "Laaja valikoima käytettyjä ja uusia osia kansainvälisiltä myyjiltä.",
-      ru: "Широкий выбор б/у и новых запчастей от международных продавцов.",
-    },
-    url: "https://www.ebay.com/motors",
-    tags: [
-      { et: "Originaal & järelturg", en: "OEM & aftermarket", fi: "Alkuperäinen & jälkimarkkinat", ru: "Оригинал и аналоги" },
-      { et: "Rahvusvaheline", en: "International", fi: "Kansainvälinen", ru: "Международный" },
-      { et: "Haruldased osad", en: "Rare parts", fi: "Harvinaiset osat", ru: "Редкие детали" },
-    ],
+    name: "VOKPARTS.EU",
+    iconLabel: "VP",
+    url: "https://www.vokparts.eu/?lang=et&call=advancedSearch&options=/data:classic%3D1%26company%255B%255D%3D45%26reserved%3D1%26recom%3D1",
   },
   {
-    name: "Autodoc.ee",
-    iconLabel: "AD",
-    description: {
-      et: "Eestikeelne tugi, kiire kohaletoimetamine ja lai mudelivalik.",
-      en: "Estonian-language support, fast delivery and wide model coverage.",
-      fi: "Vironkielinen tuki, nopea toimitus ja laaja mallivalikoima.",
-      ru: "Поддержка на эстонском, быстрая доставка и широкий выбор моделей.",
-    },
-    url: "https://www.autodoc.ee",
-    tags: [
-      { et: "Eestikeelne", en: "Estonian UI", fi: "Vironkielinen", ru: "На эстонском" },
-      { et: "1-3 päeva", en: "1-3 days", fi: "1-3 päivää", ru: "1-3 дня" },
-      { et: "Originaal & OEM", en: "Original & OEM", fi: "Alkuperäinen & OEM", ru: "Оригинал & OEM" },
-    ],
+    name: "RRR-OVAKO",
+    iconLabel: "RR",
+    url: "https://rrr.lt/en/search?sh=2971",
+  },
+  {
+    name: "eBay.de",
+    iconLabel: "eB",
+    url: "https://www.ebay.de",
   },
 ];
-
-function getLocale(obj: LocaleString, locale: string): string {
-  if (locale.startsWith("en")) return obj.en;
-  if (locale.startsWith("fi")) return obj.fi;
-  if (locale.startsWith("ru")) return obj.ru;
-  return obj.et;
-}
 
 /** Parses _word_ italic and | line-break — same conventions as Banner parseHeadline */
 function parseItalic(text: string): React.ReactNode {
@@ -159,7 +131,7 @@ const Parts: React.FC<PartsProps> = ({
         </div>
 
         {/* Platform cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-14">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-14">
           {hasCmsPlatforms
             ? c_partnerPlatforms!.map((p, i) => (
                 <a
@@ -202,30 +174,16 @@ const Parts: React.FC<PartsProps> = ({
                   href={p.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex flex-col rounded-xl border border-white/10 bg-white/5 p-6 transition-all hover:border-white/25 hover:bg-white/10"
+                  className="group flex items-center justify-between gap-4 rounded-xl border border-white/10 bg-white/5 p-6 transition-all hover:border-white/25 hover:bg-white/10"
                 >
-                  <div className="flex items-start justify-between gap-4 mb-4">
-                    <div className="flex items-center gap-4">
-                      <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-white text-sm font-bold text-foreground shrink-0">
-                        {p.iconLabel}
-                      </div>
-                      <div>
-                        <p className="font-semibold text-white text-base">{p.name}</p>
-                        <p className="text-xs text-white/55 mt-0.5 leading-snug max-w-xs">
-                          {getLocale(p.description, locale)}
-                        </p>
-                      </div>
+                  <div className="flex items-center gap-4 min-w-0">
+                    <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-white text-sm font-bold text-foreground shrink-0">
+                      {p.iconLabel}
                     </div>
-                    <div className="text-white/40 group-hover:text-primary transition-colors shrink-0 mt-1">
-                      <ArrowIcon />
-                    </div>
+                    <p className="font-semibold text-white text-base truncate">{p.name}</p>
                   </div>
-                  <div className="flex flex-wrap gap-2 mt-2">
-                    {p.tags.map((tag, j) => (
-                      <span key={j} className="rounded-full bg-white/8 px-3 py-1 text-[11px] font-medium text-white/55 border border-white/10">
-                        {getLocale(tag, locale)}
-                      </span>
-                    ))}
+                  <div className="text-white/40 group-hover:text-primary transition-colors shrink-0">
+                    <ArrowIcon />
                   </div>
                 </a>
               ))}

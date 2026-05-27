@@ -292,6 +292,7 @@ const Location: Template<TemplateRenderProps> = ({ __meta, document }) => {
             c_heroStatLabel={c_heroStatLabel}
             c_trustItemLabels={c_trustItemLabels}
             c_trustItemValues={c_trustItemValues}
+            locale={locale}
           />
         </ErrorBoundary>
 

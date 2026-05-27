@@ -77,10 +77,15 @@ export default function CarOfferForm({
   const [v, setV] = useState<FormValues>(INITIAL);
   const [errors, setErrors] = useState<FormErrors>({});
   const [status, setStatus] = useState<Status>("idle");
+  const [images, setImages] = useState<File[]>([]);
 
   const update = (k: keyof FormValues) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setV((s) => ({ ...s, [k]: e.target.value }));
     if (errors[k as keyof FormErrors]) setErrors((s) => ({ ...s, [k]: undefined }));
+  };
+
+  const onImagesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setImages(e.target.files ? Array.from(e.target.files) : []);
   };
 
   const validate = (): FormErrors => {
@@ -117,6 +122,7 @@ export default function CarOfferForm({
       formData.append("nimi", v.nimi);
       formData.append("telefon", v.telefon);
       formData.append("epost", v.epost);
+      images.forEach((file) => formData.append("images[]", file, file.name));
       const recaptchaToken = await getRecaptchaToken("car_offer");
       formData.append("g-recaptcha-response", recaptchaToken);
       const res = await fetch(c_carFormEndpoint, { method: "POST", headers: { Accept: "application/json" }, body: formData });
@@ -225,7 +231,7 @@ export default function CarOfferForm({
                 <button
                   type="button"
                   className="inline-flex items-center gap-2 rounded-md bg-brand text-white px-6 py-3 text-sm font-bold transition-all hover:bg-brand-soft"
-                  onClick={() => { setStatus("idle"); setV(INITIAL); setErrors({}); }}
+                  onClick={() => { setStatus("idle"); setV(INITIAL); setErrors({}); setImages([]); }}
                 >
                   {tr.carFormSendAnother}
                   <ArrowIcon />
@@ -322,6 +328,37 @@ export default function CarOfferForm({
                   optional: true,
                   rows: 3,
                 })}
+
+                {/* Image upload */}
+                <div className="flex flex-col gap-1">
+                  <div className="flex items-baseline justify-between">
+                    <label htmlFor="images" className="text-xs font-semibold text-foreground/80">
+                      {tr.carFormLabelImages}
+                    </label>
+                    <span className="text-[11px] text-foreground/40">{tr.carFormOptional}</span>
+                  </div>
+                  <label
+                    htmlFor="images"
+                    className="flex cursor-pointer items-center justify-between gap-3 rounded-md border border-dashed border-slate-300 bg-white px-4 py-3 text-sm text-slate-500 transition-colors hover:border-primary hover:text-primary"
+                  >
+                    <span>
+                      {images.length > 0
+                        ? `${images.length} ${tr.carFormImagesSelected}`
+                        : tr.carFormImagesChoose}
+                    </span>
+                    <ArrowIcon />
+                  </label>
+                  <input
+                    id="images"
+                    name="images"
+                    type="file"
+                    accept="image/*"
+                    multiple
+                    onChange={onImagesChange}
+                    className="sr-only"
+                  />
+                  <p className="text-[11px] text-foreground/40 mt-0.5">{tr.carFormImagesHint}</p>
+                </div>
               </fieldset>
 
               {/* Contact fields group */}
