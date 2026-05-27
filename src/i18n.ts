@@ -158,6 +158,13 @@ export const t = (locale: string) => ({
   footerCookies:      isFi(locale) ? "Evästeet"                    : isRu(locale) ? "Куки"                             : isEn(locale) ? "Cookies"             : "Küpsised",
 
   // ── Hero / Banner ─────────────────────────────────────────────────────────
+  heroTrust: isFi(locale)
+    ? ["OE-koodiin perustuva yhteensopivuus", "Tarkastettu laatu", "Toimitus ympäri Eurooppaa"]
+    : isRu(locale)
+    ? ["Подбор по OE-коду", "Проверенное качество", "Доставка по всей Европе"]
+    : isEn(locale)
+    ? ["OE-code based fitment", "Inspected quality", "Delivery across Europe"]
+    : ["OE-koodi põhine sobivus", "Kontrollitud kvaliteet", "Tarne üle Euroopa"],
   heroSubCopy:        isFi(locale) ? "Tarkastetut käytetyt ja laadukkaat uudet aftermarket-varaosat. Yli 20 vuoden kokemus Mercedes-Benz-ajoneuvojen varaosista. Tarvittaessa autamme löytämään sopivan ratkaisun myös muille automerkeille." : isRu(locale) ? "Проверенные б/у и качественные новые неоригинальные запчасти. Более 20 лет опыта в области запчастей для автомобилей Mercedes-Benz. При необходимости поможем подобрать решение и для других марок." : isEn(locale) ? "Inspected used and quality new aftermarket parts. Over 20 years of experience with Mercedes-Benz vehicle parts. If needed, we'll help find the right solution for other car makes too." : "Kontrollitud kasutatud ja kvaliteetsed uued aftermarket-varuosad. Üle 20 aasta kogemust Mercedes-Benz sõidukite varuosade valdkonnas. Vajadusel aitame leida sobiva lahenduse ka teistele automarkidele.",
 
   // ── Parts / Varuosad ────────────────────────────────────────────────────────

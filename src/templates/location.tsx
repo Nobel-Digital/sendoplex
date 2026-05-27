@@ -116,8 +116,12 @@ export const config: TemplateConfig = {
 };
 
 export const getPath: GetPath<TemplateProps> = ({ document }) => {
+  // Prefer the per-profile slug set in Yext (recommended pattern). When unset,
+  // fall back to a clean locale-based path that mirrors the language switcher
+  // hrefs ("/", "/en", "/fi", "/ru") so switching locales never 404s.
   if (document.slug) return document.slug;
-  return `${document.meta?.locale || "et"}/${document.id}`;
+  const locale = (document.meta?.locale ?? "et").split("-")[0].toLowerCase();
+  return locale === "et" ? "index" : locale;
 };
 
 export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({ document }): HeadConfig => ({

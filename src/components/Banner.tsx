@@ -4,13 +4,6 @@ import { t } from "../i18n";
 const FALLBACK_IMAGE =
   "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=2400&q=80&auto=format&fit=crop";
 
-const DEFAULT_TRUST: Array<{ label: string; value: string }> = [
-  { label: "PAKKUMINE",      value: "1h jooksul" },
-  { label: "TASUMINE",       value: "Sularahas või kontole" },
-  { label: "VORMISTUS",      value: "Tasuta, samal päeval" },
-  { label: "SÕIDAME JÄRELE", value: "Kogu Eesti, Soome" },
-];
-
 export interface BannerProps {
   c_heroImage?: any;
   c_heroSlogan?: string;
@@ -75,10 +68,13 @@ const Banner: React.FC<BannerProps> = ({
   const tr = t(locale);
   const imageUrl = c_heroImage?.image?.url ?? FALLBACK_IMAGE;
 
-  const trustItems =
-    Array.isArray(c_trustItemLabels) && c_trustItemLabels.length > 0
-      ? c_trustItemLabels.map((label, i) => ({ label, value: c_trustItemValues?.[i] ?? "" }))
-      : DEFAULT_TRUST;
+  // Trust strip = 3 short selling points. Prefer Yext values (locale-specific);
+  // otherwise fall back to the localized defaults. Labels are optional captions.
+  const cmsValues = Array.isArray(c_trustItemValues) ? c_trustItemValues.filter(Boolean) : [];
+  const trustItems: Array<{ label?: string; value: string }> =
+    cmsValues.length > 0
+      ? cmsValues.map((value, i) => ({ label: c_trustItemLabels?.[i], value }))
+      : tr.heroTrust.map((value) => ({ value }));
 
   // Secondary CTA: use Yext field if set, otherwise always show "Otsi varuosa"
   const secLabel = c_heroSecondaryButton?.label ?? "Otsi varuosa";
@@ -120,7 +116,7 @@ const Banner: React.FC<BannerProps> = ({
             {c_heroSlogan && (
               <div className="flex items-center gap-2 mb-5">
                 <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" aria-hidden="true" />
-                <span className="text-[11px] font-semibold tracking-[0.14em] uppercase text-white/42">
+                <span className="text-[11px] font-semibold tracking-[0.14em] uppercase text-white/75">
                   {c_heroSlogan}
                 </span>
               </div>
@@ -165,56 +161,25 @@ const Banner: React.FC<BannerProps> = ({
               {subCopy}
             </p>
           </div>
-
-          {/* Right — stat block */}
-          {(c_heroStatNumber || c_heroStatLabel) && (
-            <div className="mt-12 lg:mt-0 lg:shrink-0 lg:text-right">
-              {c_heroStatKicker && (
-                <p
-                  className="italic text-white/65 mb-1"
-                  style={{ fontFamily: "'Instrument Serif', Georgia, serif", fontSize: "clamp(15px, 1.4vw, 20px)" }}
-                >
-                  {c_heroStatKicker}
-                </p>
-              )}
-              {c_heroStatNumber && (
-                <p
-                  className="font-bold text-white leading-none"
-                  style={{ fontSize: "clamp(56px, 6.5vw, 88px)" }}
-                >
-                  {c_heroStatNumber}
-                </p>
-              )}
-              {c_heroStatLabel && (
-                <p className="mt-2 text-[11px] font-semibold tracking-[0.12em] uppercase text-white/48">
-                  {c_heroStatLabel}
-                </p>
-              )}
-            </div>
-          )}
         </div>
       </div>
 
       {/* Trust strip */}
       <div
-        className="relative z-10 grid grid-cols-2 md:grid-cols-4"
+        className="relative z-10 grid grid-cols-1 sm:grid-cols-3"
         style={{ borderTop: "1px solid rgba(255,255,255,0.18)" }}
       >
         {trustItems.map((item, i) => (
           <div
             key={i}
             className={`py-5 px-6 ${
-              i < trustItems.length - 1
-                ? i === 1
-                  ? "border-r-0 md:border-r border-white/10"
-                  : "border-r border-white/10"
-                : ""
+              i < trustItems.length - 1 ? "border-b sm:border-b-0 sm:border-r border-white/10" : ""
             }`}
           >
-            <p className="text-[10px] font-semibold tracking-[0.13em] uppercase text-white/28 mb-1.5">
-              {String(i + 1).padStart(2, "0")} — {item.label}
+            <p className="text-[10px] font-semibold tracking-[0.13em] uppercase text-white/55 mb-1.5">
+              {String(i + 1).padStart(2, "0")}{item.label ? ` — ${item.label}` : ""}
             </p>
-            <p className="font-semibold text-white/60" style={{ fontSize: "20px" }}>{item.value}</p>
+            <p className="font-semibold text-white/90" style={{ fontSize: "20px" }}>{item.value}</p>
           </div>
         ))}
       </div>

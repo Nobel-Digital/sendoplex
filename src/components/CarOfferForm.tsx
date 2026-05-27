@@ -70,7 +70,7 @@ export default function CarOfferForm({
   c_carFormTestimonialQuote,
   c_carFormTestimonialAuthor,
   c_carFormTestimonialMeta,
-  c_carFormEndpoint = "https://formcarry.com/s/eoCcqSszpYD",
+  c_carFormEndpoint = "",
   locale = "et",
 }: CarOfferFormProps) {
   const tr = t(locale);
@@ -108,6 +108,12 @@ export default function CarOfferForm({
     if (Object.keys(errs).length) {
       const firstKey = Object.keys(errs)[0];
       document.querySelector<HTMLElement>(`[name="${firstKey}"]`)?.focus();
+      return;
+    }
+    // Endpoint is supplied via the Yext c_carFormEndpoint field (kept out of the
+    // public repo). Bail clearly if it hasn't been configured.
+    if (!c_carFormEndpoint) {
+      setStatus("error");
       return;
     }
     setStatus("sending");
