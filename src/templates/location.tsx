@@ -116,12 +116,12 @@ export const config: TemplateConfig = {
 };
 
 export const getPath: GetPath<TemplateProps> = ({ document }) => {
-  // Prefer the per-profile slug set in Yext (recommended pattern). When unset,
-  // fall back to a clean locale-based path that mirrors the language switcher
-  // hrefs ("/", "/en", "/fi", "/ru") so switching locales never 404s.
-  if (document.slug) return document.slug;
   const locale = (document.meta?.locale ?? "et").split(/[-_]/)[0].toLowerCase();
-  return locale === "et" ? "index" : locale;
+  // Non-ET locales always use the locale code as path (/en, /fi, /ru).
+  // Ignoring document.slug prevents inheriting the ET slug ("index.html")
+  // which would cause a path collision and silently drop the locale page.
+  if (locale !== "et") return locale;
+  return document.slug || "index";
 };
 
 export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({ document }): HeadConfig => ({
