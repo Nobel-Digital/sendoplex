@@ -168,7 +168,7 @@ const ContactSection = ({
                 <div className="flex items-center gap-3">
                   <PhoneIcon />
                   <span className="uppercase tracking-widest text-xs font-bold">
-                    Helista kohe — Kristjan võtab vastu
+                    Helista kohe
                   </span>
                 </div>
                 <ArrowIcon />
