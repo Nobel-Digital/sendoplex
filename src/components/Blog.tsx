@@ -12,6 +12,7 @@ export interface BlogArticle {
 }
 
 export interface BlogProps {
+  c_blogSectionEyebrow?: string;
   c_blogSectionTitle?: string;
   c_blogSectionDescription?: string;
   c_blogArticles?: BlogArticle[];
@@ -42,6 +43,7 @@ const ArrowIcon = () => (
 );
 
 const Blog: React.FC<BlogProps> = ({
+  c_blogSectionEyebrow,
   c_blogSectionTitle,
   c_blogSectionDescription,
   c_blogArticles,
@@ -66,7 +68,7 @@ const Blog: React.FC<BlogProps> = ({
         <div className="flex flex-col md:flex-row md:items-start md:gap-16 mb-12">
           <div className="flex-1">
             <span className="inline-block text-xs font-semibold tracking-widest uppercase text-primary mb-4">
-              Blogi ja nõuanded
+              {c_blogSectionEyebrow ?? "Blogi ja nõuanded"}
             </span>
             <h2 className="text-section-title font-bold text-foreground leading-tight">
               {sectionTitle}

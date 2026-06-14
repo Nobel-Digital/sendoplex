@@ -178,6 +178,7 @@ export interface AboutStat {
 }
 
 interface AboutProps {
+  c_aboutEyebrow?: string;
   c_aboutTitle?: string;
   c_aboutPhoto?: { image?: { url: string }; altText?: string };
   c_aboutDescription?: { json?: RichTextJson };
@@ -190,6 +191,7 @@ interface AboutProps {
 // ── Component ─────────────────────────────────────────────────────────────────
 
 const About: React.FC<AboutProps> = ({
+  c_aboutEyebrow,
   c_aboutTitle,
   c_aboutPhoto,
   c_aboutDescription,
@@ -230,7 +232,7 @@ const About: React.FC<AboutProps> = ({
           {/* Right — copy */}
           <div className="flex-1 min-w-0">
             <span className="inline-block text-xs font-semibold tracking-widest uppercase text-primary mb-4">
-              Meist
+              {c_aboutEyebrow ?? "Meist"}
             </span>
             {c_aboutTitle && (
               <h2 className="text-section-title font-bold text-foreground leading-tight mb-8">
