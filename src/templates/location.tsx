@@ -424,6 +424,7 @@ const Location: Template<TemplateRenderProps> = ({ __meta, document }) => {
             facebookPageUrl={facebookPageUrl}
             c_mapIframe={c_mapIframe}
             hours={hours}
+            locale={locale}
           />
         </ErrorBoundary>
       </PageLayout>

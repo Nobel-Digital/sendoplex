@@ -1,4 +1,5 @@
 import * as React from "react";
+import { t } from "../i18n";
 
 export interface ContactSectionProps {
   c_contactEyebrow?: string;
@@ -24,6 +25,7 @@ export interface ContactSectionProps {
   c_privacyPolicy?: any;
   c_mapIframe?: any;
   hours?: Record<string, { openIntervals?: { start: string; end: string }[]; isClosed?: boolean }>;
+  locale?: string;
 }
 
 const PhoneIcon = () => (
@@ -91,7 +93,9 @@ const ContactSection = ({
   facebookPageUrl,
   c_mapIframe,
   hours,
+  locale = "et",
 }: ContactSectionProps) => {
+  const tr = t(locale);
   const contactPhone = phone || mobilePhone;
 
   // c_mapIframe is a plain MULTILINE string — accept either:
@@ -125,14 +129,14 @@ const ContactSection = ({
     const wk = ["monday", "tuesday", "wednesday", "thursday", "friday"];
     const wkOpen = wk.map((d) => hours[d]?.openIntervals?.[0]);
     if (wkOpen.every((h) => h && h.start === wkOpen[0]!.start && h.end === wkOpen[0]!.end)) {
-      hoursRows.push({ label: "E–R", value: `${wkOpen[0]!.start}–${wkOpen[0]!.end}` });
+      hoursRows.push({ label: tr.contactWeekdays, value: `${wkOpen[0]!.start}–${wkOpen[0]!.end}` });
     }
     const sat = hours.saturday;
-    if (sat?.isClosed) hoursRows.push({ label: "L", value: "suletud" });
-    else if (sat?.openIntervals?.[0]) hoursRows.push({ label: "L", value: `${sat.openIntervals[0].start}–${sat.openIntervals[0].end}` });
+    if (sat?.isClosed) hoursRows.push({ label: tr.contactSaturday, value: tr.contactClosed });
+    else if (sat?.openIntervals?.[0]) hoursRows.push({ label: tr.contactSaturday, value: `${sat.openIntervals[0].start}–${sat.openIntervals[0].end}` });
     const sun = hours.sunday;
-    if (sun?.isClosed) hoursRows.push({ label: "P", value: "suletud" });
-    else if (sun?.openIntervals?.[0]) hoursRows.push({ label: "P", value: `${sun.openIntervals[0].start}–${sun.openIntervals[0].end}` });
+    if (sun?.isClosed) hoursRows.push({ label: tr.contactSunday, value: tr.contactClosed });
+    else if (sun?.openIntervals?.[0]) hoursRows.push({ label: tr.contactSunday, value: `${sun.openIntervals[0].start}–${sun.openIntervals[0].end}` });
   }
 
   return (
@@ -170,7 +174,7 @@ const ContactSection = ({
                 <div className="flex items-center gap-3">
                   <PhoneIcon />
                   <span className="uppercase tracking-widest text-xs font-bold">
-                    Helista kohe
+                    {tr.contactCallNow}
                   </span>
                 </div>
                 <ArrowIcon />
@@ -189,24 +193,24 @@ const ContactSection = ({
             <div className="flex flex-col divide-y divide-divider flex-1">
               {emails && (
                 <div className="flex items-start justify-between gap-4 px-8 py-5">
-                  <span className="text-xs font-semibold text-foreground/40 w-20 shrink-0 pt-0.5">E-post</span>
+                  <span className="text-xs font-semibold text-foreground/40 w-20 shrink-0 pt-0.5">{tr.contactEmail}</span>
                   <div className="flex-1">
                     <a href={`mailto:${emails}`} className="text-sm text-foreground hover:text-brand transition-colors">
                       {emails}
                     </a>
-                    <p className="text-[11px] text-foreground/40 mt-0.5">Vastame ühe tunni jooksul tööajal</p>
+                    <p className="text-[11px] text-foreground/40 mt-0.5">{tr.contactEmailHint}</p>
                   </div>
                 </div>
               )}
               {addressLine && (
                 <div className="flex items-start justify-between gap-4 px-8 py-5">
-                  <span className="text-xs font-semibold text-foreground/40 w-20 shrink-0 pt-0.5">Aadress</span>
+                  <span className="text-xs font-semibold text-foreground/40 w-20 shrink-0 pt-0.5">{tr.contactAddress}</span>
                   <div className="flex-1 text-sm text-foreground">{addressLine}</div>
                 </div>
               )}
               {hoursRows.length > 0 && (
                 <div className="flex items-start gap-4 px-8 py-5">
-                  <span className="text-xs font-semibold text-foreground/40 w-20 shrink-0 pt-0.5">Lahti</span>
+                  <span className="text-xs font-semibold text-foreground/40 w-20 shrink-0 pt-0.5">{tr.contactHours}</span>
                   <div className="flex flex-col gap-0.5">
                     {hoursRows.map((row, i) => (
                       <p key={i} className="text-sm text-foreground">
@@ -218,17 +222,17 @@ const ContactSection = ({
               )}
               {(name || c_registrationCode || c_vatNumber) && (
                 <div className="flex items-start gap-4 px-8 py-5">
-                  <span className="text-xs font-semibold text-foreground/40 w-20 shrink-0 pt-0.5">Reg. nr</span>
+                  <span className="text-xs font-semibold text-foreground/40 w-20 shrink-0 pt-0.5">{tr.contactRegNr}</span>
                   <div className="text-sm text-foreground/70 leading-snug">
                     {name && <p className="font-medium text-foreground">{name}</p>}
                     {c_registrationCode && <p>{c_registrationCode}</p>}
-                    {c_vatNumber && <p>KMKR {c_vatNumber}</p>}
+                    {c_vatNumber && <p>{tr.contactVat} {c_vatNumber}</p>}
                   </div>
                 </div>
               )}
               {(facebookPageUrl || instagramHandle) && (
                 <div className="flex items-start gap-4 px-8 py-5">
-                  <span className="text-xs font-semibold text-foreground/40 w-20 shrink-0 pt-0.5">{c_contactSectionTitle3 ?? "Sotsiaal"}</span>
+                  <span className="text-xs font-semibold text-foreground/40 w-20 shrink-0 pt-0.5">{c_contactSectionTitle3 ?? tr.contactSocial}</span>
                   <div className="flex gap-4 text-sm">
                     {facebookPageUrl && (
                       <a href={facebookPageUrl} target="_blank" rel="noopener noreferrer" className="text-foreground/70 hover:text-brand transition-colors">Facebook</a>
@@ -250,7 +254,7 @@ const ContactSection = ({
                 className="w-full h-full min-h-[320px] border-0"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Asukoha kaart"
+                title={tr.contactMapTitle}
               />
             ) : (
               <div className="w-full h-full min-h-[320px] relative">
