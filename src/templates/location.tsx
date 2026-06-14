@@ -29,7 +29,7 @@ export const config: TemplateConfig = {
   stream: {
     $id: "Location",
     filter: {
-      entityIds: [YEXT_PUBLIC_LOCATION_ENTITY_ID],
+      entityIds: ["387714557506965021"],
     },
     fields: [
       // ── Core ──────────────────────────────────────────────────────────────
