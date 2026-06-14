@@ -187,7 +187,7 @@ const Banner: React.FC<BannerProps> = ({
       {/* Scroll indicator */}
       <div className="relative z-10 flex justify-center py-3.5 border-t border-white/8" aria-hidden="true">
         <div className="flex items-center gap-2 text-white/28">
-          <span className="text-[10px] font-semibold tracking-[0.15em] uppercase">Keri alla</span>
+          <span className="text-[10px] font-semibold tracking-[0.15em] uppercase">{tr.heroScrollDown}</span>
           <svg viewBox="0 0 16 16" fill="none" className="w-3 h-3 animate-bounce">
             <path d="M8 3v10m0 0l-4-4m4 4l4-4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
           </svg>

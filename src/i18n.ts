@@ -83,6 +83,7 @@ export const t = (locale: string) => ({
   carFormLabelMileage:   isFi(locale) ? "Kilometrit"  : isRu(locale) ? "Пробег"      : isEn(locale) ? "Mileage"            : "Läbisõit",
   carFormLabelPrice:     isFi(locale) ? "Pyyntihinta" : isRu(locale) ? "Желаемая цена" : isEn(locale) ? "Asking price"     : "Küsitav hind",
   carFormLabelInfo:      isFi(locale) ? "Lisätiedot / kunto" : isRu(locale) ? "Доп. информация / состояние" : isEn(locale) ? "Additional info / condition" : "Lisainfo / seisukord",
+  carFormPlaceholderInfo: isFi(locale) ? "Esim. toinen omistaja, kaikki huollot tehty, talvirenkaat mukana..." : isRu(locale) ? "Напр. второй владелец, все ТО пройдены, зимние шины в комплекте..." : isEn(locale) ? "E.g. second owner, all services done, winter tyres included..." : "Nt. teine omanik, kõik hooldused tehtud, talverehvid kaasa...",
   carFormLabelName:      isFi(locale) ? "Etu- ja sukunimi" : isRu(locale) ? "Имя и фамилия" : isEn(locale) ? "Full name"  : "Ees- ja perekonnanimi",
   carFormLabelPhone:     isFi(locale) ? "Puhelin"     : isRu(locale) ? "Телефон"     : isEn(locale) ? "Phone"              : "Telefon",
   carFormLabelEmail:     isFi(locale) ? "Sähköposti"  : isRu(locale) ? "Эл. почта"   : isEn(locale) ? "Email"              : "E-post",
@@ -158,6 +159,7 @@ export const t = (locale: string) => ({
   footerCookies:      isFi(locale) ? "Evästeet"                    : isRu(locale) ? "Куки"                             : isEn(locale) ? "Cookies"             : "Küpsised",
 
   // ── Hero / Banner ─────────────────────────────────────────────────────────
+  heroScrollDown: isFi(locale) ? "Vieritä alas" : isRu(locale) ? "Прокрутить вниз" : isEn(locale) ? "Scroll down" : "Keri alla",
   heroTrust: isFi(locale)
     ? ["OE-koodiin perustuva yhteensopivuus", "Tarkastettu laatu", "Toimitus ympäri Eurooppaa"]
     : isRu(locale)
