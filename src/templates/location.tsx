@@ -109,7 +109,7 @@ export const config: TemplateConfig = {
       "c_faqTitle",
     ],
     localization: {
-      locales: YEXT_PUBLIC_LOCATION_LOCALE_CODE.split(","),
+      locales: ["et"],
       primary: false,
     },
   },
