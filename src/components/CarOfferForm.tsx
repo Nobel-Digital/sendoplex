@@ -332,7 +332,7 @@ export default function CarOfferForm({
                   {field("hind",     tr.carFormLabelPrice,   "number", { placeholder: "8 500", suffix: "€", optional: true, inputMode: "numeric" })}
                 </div>
                 {field("info", tr.carFormLabelInfo, "textarea", {
-                  placeholder: "Nt. teine omanik, kõik hooldused tehtud, talverehvid kaasa...",
+                  placeholder: tr.carFormPlaceholderInfo,
                   optional: true,
                   rows: 3,
                 })}
