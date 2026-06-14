@@ -349,6 +349,7 @@ const Location: Template<TemplateRenderProps> = ({ __meta, document }) => {
             c_aboutSignature={c_aboutSignature}
             c_aboutFounderLabel={c_aboutFounderLabel}
             description={description}
+            locale={locale}
           />
         </ErrorBoundary>
 
