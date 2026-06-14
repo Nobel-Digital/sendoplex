@@ -76,9 +76,8 @@ const Banner: React.FC<BannerProps> = ({
       ? cmsValues.map((value, i) => ({ label: c_trustItemLabels?.[i], value }))
       : tr.heroTrust.map((value) => ({ value }));
 
-  // Secondary CTA: use Yext field if set, otherwise always show "Otsi varuosa"
-  const secLabel = c_heroSecondaryButton?.label ?? "Otsi varuosa";
-  const secLink  = c_heroSecondaryButton?.link  ?? "#varuosad";
+  const secLabel = c_heroSecondaryButton?.label;
+  const secLink  = c_heroSecondaryButton?.link;
 
   const subCopy = c_heroSubCopy ?? tr.heroSubCopy;
 
@@ -142,18 +141,19 @@ const Banner: React.FC<BannerProps> = ({
                   href={c_heroButton.link}
                   className="inline-flex items-center gap-2.5 rounded-full bg-primary text-brand px-6 py-3.5 text-sm font-bold transition-all hover:bg-primary-hover hover:shadow-lg"
                 >
-                  {c_heroButton.label ?? "Paku oma autot"}
+                  {c_heroButton.label}
                   <ArrowIcon />
                 </a>
               )}
-              {/* Secondary CTA — always "Otsi varuosa" unless overridden */}
-              <a
-                href={secLink}
-                className="inline-flex items-center gap-2.5 rounded-full border border-white/35 bg-white/8 backdrop-blur-sm text-white px-6 py-3.5 text-sm font-semibold transition-all hover:border-white/65 hover:bg-white/14"
-              >
-                {secLabel}
-                <ArrowIcon />
-              </a>
+              {secLabel && secLink && (
+                <a
+                  href={secLink}
+                  className="inline-flex items-center gap-2.5 rounded-full border border-white/35 bg-white/8 backdrop-blur-sm text-white px-6 py-3.5 text-sm font-semibold transition-all hover:border-white/65 hover:bg-white/14"
+                >
+                  {secLabel}
+                  <ArrowIcon />
+                </a>
+              )}
             </div>
 
             {/* Sub-copy paragraph */}
