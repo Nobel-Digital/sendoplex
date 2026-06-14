@@ -57,8 +57,8 @@ const Blog: React.FC<BlogProps> = ({
       ? c_blogArticles
       : DEFAULT_ARTICLES;
 
-  const sectionTitle = c_blogSectionTitle ?? DEFAULT_SECTION_TITLE;
-  const sectionDesc  = c_blogSectionDescription ?? DEFAULT_SECTION_DESC;
+  const sectionTitle = c_blogSectionTitle;
+  const sectionDesc  = c_blogSectionDescription;
 
   return (
     <section className="bg-background border-b border-divider py-20 px-6 md:px-10" id="blogi">
@@ -70,13 +70,17 @@ const Blog: React.FC<BlogProps> = ({
             <span className="inline-block text-xs font-semibold tracking-widest uppercase text-primary mb-4">
               {c_blogSectionEyebrow ?? "Blogi ja nõuanded"}
             </span>
-            <h2 className="text-section-title font-bold text-foreground leading-tight">
-              {sectionTitle}
-            </h2>
+            {sectionTitle && (
+              <h2 className="text-section-title font-bold text-foreground leading-tight">
+                {sectionTitle}
+              </h2>
+            )}
           </div>
-          <p className="mt-6 md:mt-2 md:w-80 text-foreground/55 text-sm leading-relaxed">
-            {sectionDesc}
-          </p>
+          {sectionDesc && (
+            <p className="mt-6 md:mt-2 md:w-80 text-foreground/55 text-sm leading-relaxed">
+              {sectionDesc}
+            </p>
+          )}
         </div>
 
         {/* Grid */}
