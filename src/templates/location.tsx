@@ -109,7 +109,7 @@ export const config: TemplateConfig = {
       "c_faqTitle",
     ],
     localization: {
-      locales: ["et"],
+      locales: ["et", "en_EE", "fi", "ru"],
       primary: false,
     },
   },
