@@ -8,6 +8,7 @@ export interface FooterProps {
   _site?: any;
   logo?: string;
   c_privacyPolicy: any;
+  c_footerDescription?: any;
   c_termsContent?: any;
   c_cookiesContent?: any;
   locale?: string;
@@ -25,6 +26,16 @@ export interface FooterProps {
 
 const currentYear = new Date().getFullYear();
 
+function extractText(field: any): string {
+  if (typeof field === "string") return field;
+  const nodes: any[] = field?.json?.root?.children ?? [];
+  const collect = (n: any): string => {
+    if (n.type === "text") return n.text ?? "";
+    return (n.children ?? []).map(collect).join("");
+  };
+  return nodes.map(collect).join(" ").trim();
+}
+
 const LOCALE_LABELS: Record<string, string> = {
   et: "Eesti",
   en: "English",
@@ -40,6 +51,7 @@ const ArrowIcon = () => (
 
 const Footer = ({
   c_privacyPolicy,
+  c_footerDescription,
   c_termsContent,
   c_cookiesContent,
   locale = "et",
@@ -81,9 +93,11 @@ const Footer = ({
               </span>
               <p className="text-lg font-bold tracking-tight text-white">sendoplex</p>
             </div>
-            <p className="text-xs text-white/50 leading-relaxed max-w-[26ch]">
-              Auto kokkuost Eestis ja Soomes. Aus hindamine, kiire vormistus, raha samal päeval.
-            </p>
+            {c_footerDescription && (
+              <p className="text-xs text-white/50 leading-relaxed max-w-[26ch]">
+                {extractText(c_footerDescription)}
+              </p>
+            )}
             {(facebookPageUrl || instagramHandle) && (
               <div className="flex gap-3 mt-5">
                 {facebookPageUrl && (

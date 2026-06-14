@@ -29,6 +29,7 @@ const PageLayout = ({ children, data, templateData }: PageLayoutProps) => {
         <AnalyticsScopeProvider name="footer">
           <Footer
             c_privacyPolicy={data.c_privacyPolicy}
+            c_footerDescription={data.c_footerDescription}
             locale={locale}
             name={data.name}
             mainPhone={data.mainPhone}

@@ -51,6 +51,7 @@ export const config: TemplateConfig = {
       "yextDisplayCoordinate",
       // ── Site / brand ──────────────────────────────────────────────────────
       "c_favicon",
+      "c_footerDescription",
       "c_registrationCode",
       "c_vatNumber",
       "c_availableLocales",
@@ -229,6 +230,7 @@ const Location: Template<TemplateRenderProps> = ({ __meta, document }) => {
     c_contactSectionTitle2,
     c_contactSectionTitle3,
     c_mapIframe,
+    c_footerDescription,
     c_registrationCode,
     c_vatNumber,
     // Optional retained
@@ -269,6 +271,7 @@ const Location: Template<TemplateRenderProps> = ({ __meta, document }) => {
     c_aboutPhoto,
     c_locationSectionTitle,
     c_locationSectionDescription,
+    c_footerDescription,
     c_registrationCode,
     c_vatNumber,
     c_mapIframe,
