@@ -10,6 +10,7 @@ export interface PartnerPlatform {
 }
 
 export interface PartsProps {
+  c_partsSectionEyebrow?: string;
   c_partsSectionTitle?: string;
   c_partsSectionDescription?: string;
   c_partnerPlatforms?: PartnerPlatform[];
@@ -85,6 +86,7 @@ const SearchIcon = () => (
 );
 
 const Parts: React.FC<PartsProps> = ({
+  c_partsSectionEyebrow,
   c_partsSectionTitle,
   c_partsSectionDescription,
   c_partnerPlatforms,
@@ -107,7 +109,7 @@ const Parts: React.FC<PartsProps> = ({
           <div className="flex-1">
             {/* Eyebrow: always "VARUOSAD · SOOVITAME" — distinct from the platforms sub-label */}
             <span className="inline-block text-xs font-semibold tracking-widest uppercase text-primary mb-4 opacity-80">
-              VARUOSAD · SOOVITAME
+              {c_partsSectionEyebrow ?? "VARUOSAD · SOOVITAME"}
             </span>
             {titleNode && (
               <h2 className="text-section-title font-bold text-white leading-tight">

@@ -1,6 +1,7 @@
 import * as React from "react";
 
 export interface ContactSectionProps {
+  c_contactEyebrow?: string;
   address?: {
     line1: string;
     line2?: string;
@@ -75,6 +76,7 @@ const MapPlaceholder = () => (
 );
 
 const ContactSection = ({
+  c_contactEyebrow,
   address,
   phone,
   emails,
@@ -140,7 +142,7 @@ const ContactSection = ({
         <div className="flex flex-col md:flex-row md:items-start md:gap-16 mb-12">
           <div className="flex-1">
             <span className="inline-block text-xs font-semibold tracking-widest uppercase text-primary mb-4">
-              Kontakt ja tugi
+              {c_contactEyebrow ?? "Kontakt ja tugi"}
             </span>
             {c_contactSectionTitle1 && (
               <h2 className="text-section-title font-bold text-foreground leading-tight">

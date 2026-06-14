@@ -27,6 +27,7 @@ interface FormErrors {
 }
 
 export interface CarOfferFormProps {
+  c_carFormEyebrow?: string;
   c_carFormTitle?: string;
   c_carFormDescription?: string;
   c_carFormBullets?: string[];
@@ -64,6 +65,7 @@ const errorInputClass =
   "w-full rounded-md border border-red-300 bg-white px-4 py-3 text-slate-900 placeholder:text-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-red-300 focus:border-red-300";
 
 export default function CarOfferForm({
+  c_carFormEyebrow,
   c_carFormTitle,
   c_carFormDescription,
   c_carFormBullets,
@@ -258,7 +260,7 @@ export default function CarOfferForm({
           {/* Left — copy + bullets + testimonial */}
           <div className="flex-1">
             <span className="inline-block text-xs font-semibold tracking-widest uppercase text-primary mb-4">
-              Pakkumise päring
+              {c_carFormEyebrow ?? "Pakkumise päring"}
             </span>
             {c_carFormTitle && (
               <h2 className="text-section-title font-bold text-foreground leading-tight">

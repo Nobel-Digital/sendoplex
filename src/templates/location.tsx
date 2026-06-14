@@ -71,10 +71,12 @@ export const config: TemplateConfig = {
       "c_trustItemLabels",
       "c_trustItemValues",
       // ── Parts / Varuosad ──────────────────────────────────────────────────
+      "c_partsSectionEyebrow",
       "c_partsSectionTitle",
       "c_partsSectionDescription",
       "c_partsContactEmail",
       // ── Car offer form ────────────────────────────────────────────────────
+      "c_carFormEyebrow",
       "c_carFormTitle",
       "c_carFormDescription",
       "c_carFormBullets",
@@ -83,15 +85,18 @@ export const config: TemplateConfig = {
       "c_carFormTestimonialMeta",
       "c_carFormEndpoint",
       // ── About ─────────────────────────────────────────────────────────────
+      "c_aboutEyebrow",
       "c_aboutTitle",
       "c_aboutDescription",
       "c_aboutPhoto",
       "c_aboutSignature",
       "c_aboutFounderLabel",
       // ── Blog ──────────────────────────────────────────────────────────────
+      "c_blogSectionEyebrow",
       "c_blogSectionTitle",
       "c_blogSectionDescription",
       // ── Contact ───────────────────────────────────────────────────────────
+      "c_contactEyebrow",
       "c_contactSectionTitle1",
       "c_contactSectionTitle2",
       "c_contactSectionTitle3",
@@ -191,11 +196,13 @@ const Location: Template<TemplateRenderProps> = ({ __meta, document }) => {
     c_trustItemLabels,
     c_trustItemValues,
     // Parts
+    c_partsSectionEyebrow,
     c_partsSectionTitle,
     c_partsSectionDescription,
     c_partnerPlatforms,
     c_partsContactEmail,
     // Car offer form
+    c_carFormEyebrow,
     c_carFormTitle,
     c_carFormDescription,
     c_carFormBullets,
@@ -204,6 +211,7 @@ const Location: Template<TemplateRenderProps> = ({ __meta, document }) => {
     c_carFormTestimonialMeta,
     c_carFormEndpoint,
     // About
+    c_aboutEyebrow,
     c_aboutTitle,
     c_aboutDescription,
     c_aboutPhoto,
@@ -211,10 +219,12 @@ const Location: Template<TemplateRenderProps> = ({ __meta, document }) => {
     c_aboutSignature,
     c_aboutFounderLabel,
     // Blog
+    c_blogSectionEyebrow,
     c_blogSectionTitle,
     c_blogSectionDescription,
     c_blogArticles,
     // Contact
+    c_contactEyebrow,
     c_contactSectionTitle1,
     c_contactSectionTitle2,
     c_contactSectionTitle3,
@@ -303,6 +313,7 @@ const Location: Template<TemplateRenderProps> = ({ __meta, document }) => {
         {/* ── Varuosad / Parts ─────────────────────────────────────────────── */}
         <ErrorBoundary>
           <Parts
+            c_partsSectionEyebrow={c_partsSectionEyebrow}
             c_partsSectionTitle={c_partsSectionTitle}
             c_partsSectionDescription={c_partsSectionDescription}
             c_partnerPlatforms={c_partnerPlatforms}
@@ -315,6 +326,7 @@ const Location: Template<TemplateRenderProps> = ({ __meta, document }) => {
         {/* ── Car offer form ────────────────────────────────────────────────── */}
         <ErrorBoundary>
           <CarOfferForm
+            c_carFormEyebrow={c_carFormEyebrow}
             c_carFormTitle={c_carFormTitle}
             c_carFormDescription={c_carFormDescription}
             c_carFormBullets={c_carFormBullets}
@@ -329,6 +341,7 @@ const Location: Template<TemplateRenderProps> = ({ __meta, document }) => {
         {/* ── About ─────────────────────────────────────────────────────────── */}
         <ErrorBoundary>
           <About
+            c_aboutEyebrow={c_aboutEyebrow}
             c_aboutTitle={c_aboutTitle}
             c_aboutDescription={c_aboutDescription}
             c_aboutPhoto={c_aboutPhoto}
@@ -377,6 +390,7 @@ const Location: Template<TemplateRenderProps> = ({ __meta, document }) => {
         {/* ── Blog ─────────────────────────────────────────────────────────── */}
         <ErrorBoundary>
           <Blog
+            c_blogSectionEyebrow={c_blogSectionEyebrow}
             c_blogSectionTitle={c_blogSectionTitle}
             c_blogSectionDescription={c_blogSectionDescription}
             c_blogArticles={c_blogArticles}
@@ -394,6 +408,7 @@ const Location: Template<TemplateRenderProps> = ({ __meta, document }) => {
         {/* ── Contact ──────────────────────────────────────────────────────── */}
         <ErrorBoundary>
           <ContactSection
+            c_contactEyebrow={c_contactEyebrow}
             address={address}
             phone={mainPhone}
             mobilePhone={mobilePhone}
