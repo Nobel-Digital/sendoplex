@@ -158,6 +158,21 @@ export const t = (locale: string) => ({
   footerTerms:        isFi(locale) ? "Käyttöehdot"                 : isRu(locale) ? "Условия"                          : isEn(locale) ? "Terms"               : "Tingimused",
   footerCookies:      isFi(locale) ? "Evästeet"                    : isRu(locale) ? "Куки"                             : isEn(locale) ? "Cookies"             : "Küpsised",
 
+  // ── Contact section ─────────────────────────────────────────────────────────
+  contactCallNow:    isFi(locale) ? "Soita heti"     : isRu(locale) ? "Позвонить"           : isEn(locale) ? "Call now"           : "Helista kohe",
+  contactEmail:      isFi(locale) ? "Sähköposti"     : isRu(locale) ? "Эл. почта"           : isEn(locale) ? "Email"              : "E-post",
+  contactEmailHint:  isFi(locale) ? "Vastaamme tunnin kuluessa työaikana" : isRu(locale) ? "Ответим в течение часа в рабочее время" : isEn(locale) ? "We reply within one hour during working hours" : "Vastame ühe tunni jooksul tööajal",
+  contactAddress:    isFi(locale) ? "Osoite"         : isRu(locale) ? "Адрес"               : isEn(locale) ? "Address"            : "Aadress",
+  contactHours:      isFi(locale) ? "Avoinna"        : isRu(locale) ? "Открыто"             : isEn(locale) ? "Open"               : "Lahti",
+  contactClosed:     isFi(locale) ? "suljettu"       : isRu(locale) ? "закрыто"             : isEn(locale) ? "closed"             : "suletud",
+  contactRegNr:      isFi(locale) ? "Y-tunnus"       : isRu(locale) ? "Рег. №"              : isEn(locale) ? "Reg. no"            : "Reg. nr",
+  contactVat:        isFi(locale) ? "ALV"            : isRu(locale) ? "НДС"                 : isEn(locale) ? "VAT"                : "KMKR",
+  contactSocial:     isFi(locale) ? "Somekanavat"    : isRu(locale) ? "Соцсети"             : isEn(locale) ? "Social media"       : "Sotsiaal",
+  contactMapTitle:   isFi(locale) ? "Kartta"         : isRu(locale) ? "Карта"               : isEn(locale) ? "Location map"       : "Asukoha kaart",
+  contactWeekdays:   isFi(locale) ? "Ma–Pe"          : isRu(locale) ? "Пн–Пт"              : isEn(locale) ? "Mon–Fri"            : "E–R",
+  contactSaturday:   isFi(locale) ? "La"             : isRu(locale) ? "Сб"                  : isEn(locale) ? "Sat"                : "L",
+  contactSunday:     isFi(locale) ? "Su"             : isRu(locale) ? "Вс"                  : isEn(locale) ? "Sun"                : "P",
+
   // ── Hero / Banner ─────────────────────────────────────────────────────────
   heroScrollDown: isFi(locale) ? "Vieritä alas" : isRu(locale) ? "Прокрутить вниз" : isEn(locale) ? "Scroll down" : "Keri alla",
   heroTrust: isFi(locale)
