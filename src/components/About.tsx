@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Gallery, Item } from "react-photoswipe-gallery";
 import "photoswipe/dist/photoswipe.css";
+import { t } from "../i18n";
 
 interface TextNode       { type: "text" | "linebreak"; text: string; format: number; children?: never }
 interface ImageNode      { type: "image" | "upload" | "media" | "asset"; src?: string; url?: string; width?: number; height?: number; alt?: string; title?: string; image?: { url: string; width?: number; height?: number }; fields?: { image?: { url: string; width?: number; height?: number }; asset?: { url: string; width?: number; height?: number }; file?: { url: string; width?: number; height?: number }; media?: { url: string; width?: number; height?: number }; alt?: string; title?: string }; children?: never }
@@ -159,11 +160,6 @@ const DEFAULT_BODY = [
   `Ei mingit lõputut tagasilükku ega kahtlast „garantiitasu”. Vaatame auto üle, paneme hinna paika ja kui tagasi saame, raha on Sinu kontol enne, kui tagasi koju jõuad.`,
 ];
 
-const DEFAULT_STATS = [
-  { number: "9 a",   label: "Kogemust autoturul Eestis ja Soomes" },
-  { number: "2 800+", label: "Autot ostetud ja edasi müüdud" },
-  { number: "4.8",   label: "Keskmine hinnang Google'is (412 arvustust)" },
-];
 
 // Placeholder photo — replaced once c_aboutPhoto is set in Yext
 // Car showroom interior — professional and anonymous, no faces
@@ -186,6 +182,7 @@ interface AboutProps {
   c_aboutStats?: AboutStat[];
   c_aboutSignature?: string;
   c_aboutFounderLabel?: string;
+  locale?: string;
 }
 
 // ── Component ─────────────────────────────────────────────────────────────────
@@ -198,10 +195,12 @@ const About: React.FC<AboutProps> = ({
   c_aboutStats,
   c_aboutSignature,
   c_aboutFounderLabel,
+  locale = "et",
 }) => {
+  const tr = t(locale);
   const nodes = c_aboutDescription?.json?.root?.children;
   const hasRichText = Array.isArray(nodes) && nodes.length > 0;
-  const stats = Array.isArray(c_aboutStats) && c_aboutStats.length > 0 ? c_aboutStats : DEFAULT_STATS;
+  const stats = Array.isArray(c_aboutStats) && c_aboutStats.length > 0 ? c_aboutStats : tr.aboutStats;
   const photoUrl = c_aboutPhoto?.image?.url ?? FALLBACK_PHOTO;
   const photoAlt = c_aboutPhoto?.altText ?? "Sendoplexi tiim";
 
