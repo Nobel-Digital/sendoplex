@@ -180,19 +180,19 @@ export const t = (locale: string) => ({
 
   // ── About / stats ───────────────────────────────────────────────────────────
   aboutStats: isFi(locale) ? [
-    { number: "9 v",    label: "Kokemusta automarkkinoilta Virossa ja Suomessa" },
+    { number: "20 v",  label: "Kokemus varaosien myynnissä" },
     { number: "150+", label: "Autoa ostettu ja myyty edelleen" },
     { number: "4.8",    label: "Keskimääräinen arvosana Googlessa (412 arvostelua)" },
   ] : isRu(locale) ? [
-    { number: "9 л",    label: "Опыт на рынке автомобилей в Эстонии и Финляндии" },
+    { number: "20 л",  label: "Опыт в продаже запчастей" },
     { number: "150+", label: "Автомобилей куплено и перепродано" },
     { number: "4.8",    label: "Средняя оценка в Google (412 отзывов)" },
   ] : isEn(locale) ? [
-    { number: "9 y",    label: "Experience in the car market in Estonia and Finland" },
+    { number: "20 y",  label: "Experience in parts sales" },
     { number: "150+", label: "Cars bought and resold" },
     { number: "4.8",    label: "Average rating on Google (412 reviews)" },
   ] : [
-    { number: "9 a",    label: "Kogemust autoturul Eestis ja Soomes" },
+    { number: "20 a",  label: "Varuosade müügikogemust" },
     { number: "150+", label: "Autot ostetud ja edasi müüdud" },
     { number: "4.8",    label: "Keskmine hinnang Google'is (412 arvustust)" },
   ],
