@@ -52,7 +52,7 @@ export default function BasicForm({ c_basicFormTitle, c_basicFormDescription, lo
       const recaptchaToken = await getRecaptchaToken("submit");
       formData.append("g-recaptcha-response", recaptchaToken);
 
-      const res = await fetch("https://formcarry.com/s/eoCcqSszpYD", {
+      const res = await fetch("https://formcarry.com/s/RYFFJQRIoFE", {
         method: "POST",
         headers: { Accept: "application/json" },
         body: formData,
